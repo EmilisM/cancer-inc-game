@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CancerIncGameServer.Controllers
+namespace GameServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
