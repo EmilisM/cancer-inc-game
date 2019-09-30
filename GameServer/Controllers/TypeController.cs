@@ -8,32 +8,32 @@ namespace GameServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClassController : ControllerBase
+    public class TypeController : ControllerBase
     {
         private readonly CancerIncGameBaseContext _dbContext;
 
-        public ClassController()
+        public TypeController()
         {
             _dbContext = CancerIncGameBaseContext.GetInstance();
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Class>>> Get()
+        public async Task<ActionResult<IEnumerable<Type>>> Get()
         {
-            return await _dbContext.Class.ToListAsync();
+            return await _dbContext.Type.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Class>> Get(int id)
+        public async Task<ActionResult<Type>> Get(int id)
         {
-            var c = await _dbContext.Class.FindAsync(id);
+            var type = await _dbContext.Type.FindAsync(id);
 
-            if (c == null)
+            if (type == null)
             {
                 return NotFound();
             }
 
-            return Ok(c);
+            return Ok(type);
         }
     }
 }

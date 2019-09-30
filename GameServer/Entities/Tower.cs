@@ -1,14 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace GameServer.Entities
+﻿namespace GameServer.Entities
 {
     public class Tower
     {
-        public Tower()
-        {
-            TowerAttackType = new HashSet<TowerAttackType>();
-        }
-
         public int Id { get; set; }
         public string Name { get; set; }
         public int? Cost { get; set; }
@@ -21,6 +14,5 @@ namespace GameServer.Entities
         public bool Poison { get; set; }
 
         public virtual Class Class { get; set; }
-        public ICollection<TowerAttackType> TowerAttackType { get; set; }
     }
 }
