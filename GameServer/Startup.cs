@@ -14,8 +14,6 @@ namespace GameServer
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            services.AddSingleton<CancerIncGameBaseContext>();
-
             services.AddApplicationInsightsTelemetry();
         }
 

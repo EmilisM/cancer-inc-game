@@ -1,15 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace GameServer.Entities
 {
     public sealed class CancerIncGameBaseContext : DbContext
     {
-        private readonly IConfiguration _configuration;
+        private static CancerIncGameBaseContext _instance;
+        private static readonly object _padlock = new object();
 
-        public CancerIncGameBaseContext(IConfiguration configuration)
+        public static CancerIncGameBaseContext GetInstance()
         {
-            _configuration = configuration;
+            lock (_padlock)
+            {
+                if (_instance == null)
+                {
+                    _instance = new CancerIncGameBaseContext();
+                }
+            }
+
+            return _instance;
         }
 
         public CancerIncGameBaseContext(DbContextOptions<CancerIncGameBaseContext> options)
@@ -31,9 +39,9 @@ namespace GameServer.Entities
                 return;
             }
 
-            string connectionString = _configuration.GetConnectionString("Default");
+            var configuration = 
 
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

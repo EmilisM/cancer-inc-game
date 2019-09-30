@@ -11,9 +11,9 @@ namespace GameServer.Controllers
     {
         private readonly CancerIncGameBaseContext _dbContext;
 
-        public ClassController(CancerIncGameBaseContext context)
+        public ClassController()
         {
-            _dbContext = context;
+            _dbContext = CancerIncGameBaseContext.GetInstance();
         }
 
         [HttpGet]
@@ -27,7 +27,7 @@ namespace GameServer.Controllers
         {
             var result = _dbContext.Class.FirstOrDefault(c => c.Id == id);
 
-            return result != null ? (ActionResult<string>) Ok(result) : NotFound();
+            return result != null ? (ActionResult<string>)Ok(result) : NotFound();
         }
 
         [HttpPost]
