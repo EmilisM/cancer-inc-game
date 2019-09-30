@@ -1,45 +1,51 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using GameServer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ClassController : ControllerBase
     {
-        // GET api/values
+        private readonly CancerIncGameBaseContext _dbContext;
+
+        public ClassController(CancerIncGameBaseContext context)
+        {
+            _dbContext = context;
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new[] { "value1", "value2" };
+            return Ok(_dbContext.Class.ToList());
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            var result = _dbContext.Class.FirstOrDefault(c => c.Id == id);
+
+            return result != null ? (ActionResult<string>) Ok(result) : NotFound();
         }
 
-        // POST api/values
         [HttpPost]
         public ActionResult Post([FromBody] string value)
         {
-            return Ok();
+            return StatusCode(405);
         }
 
-        // PUT api/values/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] string value)
         {
-            return Ok();
+            return StatusCode(405);
         }
 
-        // DELETE api/values/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            return Ok();
+            return StatusCode(405);
         }
     }
 }
