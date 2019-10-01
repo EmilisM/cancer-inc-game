@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GameServer.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +19,13 @@ namespace GameServer.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Class>>> Get()
+        public async Task<ActionResult<IEnumerable<Class>>> Get([FromQuery] string name)
         {
+            if (name != null)
+            {
+                return await _dbContext.Class.Where(c => c.Name.Contains(name)).ToListAsync();
+            }
+
             return await _dbContext.Class.ToListAsync();
         }
 

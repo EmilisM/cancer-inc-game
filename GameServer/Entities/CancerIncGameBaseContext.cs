@@ -14,14 +14,9 @@ namespace GameServer.Entities
         {
             lock (Padlock)
             {
-                if (_instance == null)
-                {
-                    _instance = new CancerIncGameBaseContext(
-                        AppConfiguration.Configuration.GetConnectionString("Default"));
-                }
+                return _instance ??= new CancerIncGameBaseContext(
+                    AppConfiguration.Configuration.GetConnectionString("Default"));
             }
-
-            return _instance;
         }
 
         private CancerIncGameBaseContext(string connectionString)
