@@ -9,8 +9,10 @@ namespace GameClient.GameObjects.Tower
         public double? Damage { get; set; }
         public double? Speed { get; set; }
         public int Size { get; set; }
-        public int Range { get; set; }
+        public int? Range { get; set; }
+        public string Effect { get; set; }
+        public bool Poison { get; set; }
 
-        public ClassType ClassType { get; set; }
+        public ClassType? ClassType { get; set; }
     }
 }

@@ -1,10 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GameClient.GameObjects.Tower
 {
-    class TowerBuilderRadar
+    public class TowerBuilderRadar : ITowerBuilder
     {
+        private readonly Tower _tower;
+
+        public TowerBuilderRadar()
+        {
+            _tower = new Tower();
+        }
+
+        public void BuildTower()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Tower GetTower()
+        {
+            return _tower;
+        }
     }
 }

@@ -2,9 +2,11 @@
 {
     public class TowerDirector
     {
-        public void Construct(ITowerBuilder builder)
+        public Tower Construct(ITowerBuilder builder)
         {
+            builder.BuildTower();
 
+            return builder.GetTower();
         }
     }
 }

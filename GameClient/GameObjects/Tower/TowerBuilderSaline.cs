@@ -1,26 +1,24 @@
-﻿namespace GameClient.GameObjects.Tower
+﻿using System;
+
+namespace GameClient.GameObjects.Tower
 {
     public class SalineTowerBuilder : ITowerBuilder
     {
-        public string Name { get; set; }
-        public int Cost { get; set; }
-        public string Type { get; set; }
-        public int Damage { get; set; }
-        public double Speed { get; set; }
-        public int Size { get; set; }
-        public string ClassType { get; set; }
+        private readonly Tower _tower;
+
+        public SalineTowerBuilder()
+        {
+            _tower = new Tower();
+        }
+
+        public void BuildTower()
+        {
+            throw new NotImplementedException();
+        }
 
         public Tower GetTower()
         {
-            return new Tower(
-                "Saline",
-                200,
-                "none",
-                0,
-                0.1,
-                3,
-                0,
-                "Red");
+            return _tower;
         }
     }
 }
