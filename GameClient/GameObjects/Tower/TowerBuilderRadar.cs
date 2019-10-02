@@ -1,4 +1,4 @@
-﻿using System;
+﻿using GameClient.GameObjects.Class;
 
 namespace GameClient.GameObjects.Tower
 {
@@ -13,7 +13,8 @@ namespace GameClient.GameObjects.Tower
 
         public void BuildTower()
         {
-            throw new NotImplementedException();
+            _tower.ClassType = ClassType.Green;
+            //TODO: Build the rest of object
         }
 
         public Tower GetTower()
