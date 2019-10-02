@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using GameClient.Api;
 
 namespace GameClient.GameObjects.Class
@@ -27,9 +28,15 @@ namespace GameClient.GameObjects.Class
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
 
-            var result = ApiClient.GetClass(type.ToString());
+            var result = ApiClient.GetClasses(type.ToString()).FirstOrDefault();
 
-            //TODO: Map api object Class to IClass
+            if (result == null)
+            {
+                return null;
+            }
+
+            classResult.DamageModifier = result.DamageModifier;
+            classResult.SpeedModifier = result.SpeedModifier;
 
             return classResult;
         }
