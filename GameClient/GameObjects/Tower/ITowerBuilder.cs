@@ -11,6 +11,5 @@
         string ClassType { get; set; }
 
         Tower GetTower();
-
     }
 }

@@ -5,7 +5,7 @@
         public string Name { get; set; }
         public int Cost { get; set; }
         public string Type { get; set; }
-        public double Damage { get; set; }
+        public int Damage { get; set; }
         public double Speed { get; set; }
         public int Size { get; set; }
         public string ClassType { get; set; }
