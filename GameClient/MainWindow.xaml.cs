@@ -1,5 +1,4 @@
 ﻿using System.Windows.Media;
-using GameClient.GameObjects.Tower;
 
 namespace GameClient
 {
@@ -10,12 +9,6 @@ namespace GameClient
             InitializeComponent();
 
             GameView.Background = Brushes.Black;
-
-            var builder = new SalineTowerBuilder();
-
-            var director = new TowerDirector();
-
-            var tower = director.Construct(builder);
         }
     }
 }

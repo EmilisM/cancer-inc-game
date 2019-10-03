@@ -5,7 +5,7 @@ namespace GameClient.GameObjects.Tower
 {
     public interface ITowerBuilder
     {
-        void BuildTower(IEnumerable<ApiTower> towers);
+        void BuildTower(IEnumerable<ApiAttackType> attackTypes, IEnumerable<ApiTower> towers);
 
         Tower GetTower();
     }

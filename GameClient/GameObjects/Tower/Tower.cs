@@ -20,7 +20,7 @@ namespace GameClient.GameObjects.Tower
         public ClassType ClassType { get; set; }
         public IEnumerable<AttackType> AttackTypes { get; set; }
 
-        public void FromApiTower(ApiTower tower)
+        public void FromApiTowers(ApiTower tower, IEnumerable<ApiAttackType> towerAttackTypes)
         {
             Name = tower.Name;
             Cost = tower.Cost;
@@ -31,8 +31,11 @@ namespace GameClient.GameObjects.Tower
             Size = tower.Size;
             Speed = tower.Speed;
 
-            ClassType = tower.Class == null ? ClassType.All : Enum.Parse<ClassType>(tower.Class.Name);
-            AttackTypes = tower.AttackType?.Select(attackType => Enum.Parse<AttackType>(attackType.Name));
+            ClassType = tower.Class == null
+                ? ClassType.All
+                : Enum.Parse<ClassType>(tower.Class.Name);
+
+            AttackTypes = towerAttackTypes?.Select(towerAttackType => Enum.Parse<AttackType>(towerAttackType.AttackType.Name));
         }
     }
 }

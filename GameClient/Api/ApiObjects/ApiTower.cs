@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GameClient.Api.ApiObjects
 {
@@ -16,7 +15,5 @@ namespace GameClient.Api.ApiObjects
         [JsonProperty("poison")] public bool Poison { get; set; }
 
         [JsonProperty("class")] public ApiClass Class { get; set; }
-
-        public IEnumerable<ApiType> AttackType { get; set; }
     }
 }
