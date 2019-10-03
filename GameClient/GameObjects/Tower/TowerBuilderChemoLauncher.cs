@@ -1,7 +1,6 @@
-﻿using GameClient.GameObjects.Class;
-using System;
+﻿using System.Collections.Generic;
 using System.Linq;
-using GameClient.Api;
+using GameClient.Api.ApiObjects;
 
 namespace GameClient.GameObjects.Tower
 {
@@ -14,9 +13,16 @@ namespace GameClient.GameObjects.Tower
             _tower = new Tower();
         }
 
-        public void BuildTower()
+        public void BuildTower(IEnumerable<ApiTower> towers)
         {
-            //TODO: Build the rest of object
+            var tower = towers.FirstOrDefault(t => t.Name.Contains("Chemo launcher"));
+
+            if (tower == null)
+            {
+                return;
+            }
+
+            _tower.FromApiTower(tower);
         }
 
         public Tower GetTower()

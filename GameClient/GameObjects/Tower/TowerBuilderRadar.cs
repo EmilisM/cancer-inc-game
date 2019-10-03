@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using GameClient.Api.ApiObjects;
 
 namespace GameClient.GameObjects.Tower
@@ -14,7 +15,14 @@ namespace GameClient.GameObjects.Tower
 
         public void BuildTower(IEnumerable<ApiTower> towers)
         {
-            throw new System.NotImplementedException();
+            var tower = towers.FirstOrDefault(t => t.Name.Contains("Radar"));
+
+            if (tower == null)
+            {
+                return;
+            }
+
+            _tower.FromApiTower(tower);
         }
 
         public Tower GetTower()
