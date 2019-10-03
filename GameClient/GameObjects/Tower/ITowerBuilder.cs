@@ -1,8 +1,11 @@
-﻿namespace GameClient.GameObjects.Tower
+﻿using System.Collections.Generic;
+using GameClient.Api.ApiObjects;
+
+namespace GameClient.GameObjects.Tower
 {
     public interface ITowerBuilder
     {
-        void BuildTower();
+        void BuildTower(IEnumerable<ApiTower> towers);
 
         Tower GetTower();
     }

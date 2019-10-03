@@ -1,10 +1,11 @@
-﻿namespace GameClient.GameObjects.Class
+﻿namespace GameClient.GameObjects.Types
 {
     public enum ClassType
     {
         Red,
         White,
         Green,
-        Yellow
+        Yellow,
+        All
     }
 }

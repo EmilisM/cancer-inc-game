@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using GameClient.Api;
+using GameClient.GameObjects.Types;
 
 namespace GameClient.GameObjects.Class
 {

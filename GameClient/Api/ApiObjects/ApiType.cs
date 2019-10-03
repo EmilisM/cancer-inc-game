@@ -2,11 +2,9 @@
 
 namespace GameClient.Api.ApiObjects
 {
-    public class Class
+    public class ApiType
     {
         [JsonProperty("id")] public int Id { get; set; }
         [JsonProperty("name")] public string Name { get; set; }
-        [JsonProperty("damageModifier")] public double DamageModifier { get; set; }
-        [JsonProperty("speedModifier")] public double SpeedModifier { get; set; }
     }
 }

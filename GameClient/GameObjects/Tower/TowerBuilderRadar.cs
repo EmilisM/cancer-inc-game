@@ -1,4 +1,5 @@
-﻿using GameClient.GameObjects.Class;
+﻿using System.Collections.Generic;
+using GameClient.Api.ApiObjects;
 
 namespace GameClient.GameObjects.Tower
 {
@@ -11,10 +12,9 @@ namespace GameClient.GameObjects.Tower
             _tower = new Tower();
         }
 
-        public void BuildTower()
+        public void BuildTower(IEnumerable<ApiTower> towers)
         {
-            _tower.ClassType = ClassType.Green;
-            //TODO: Build the rest of object
+            throw new System.NotImplementedException();
         }
 
         public Tower GetTower()

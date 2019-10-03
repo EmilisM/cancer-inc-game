@@ -1,4 +1,6 @@
-﻿namespace GameServer.Entities
+﻿using System.Collections.Generic;
+
+namespace GameServer.Entities
 {
     public class Tower
     {

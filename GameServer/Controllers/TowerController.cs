@@ -23,10 +23,15 @@ namespace GameServer.Controllers
         {
             if (name != null)
             {
-                return await _dbContext.Tower.Where(tower => tower.Name.Contains(name)).ToListAsync();
+                return await _dbContext.Tower
+                    .Include(tower => tower.Class)
+                    .Where(tower => tower.Name.Contains(name))
+                    .ToListAsync();
             }
 
-            return await _dbContext.Tower.ToListAsync();
+            return await _dbContext.Tower
+                .Include(tower => tower.Class)
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]

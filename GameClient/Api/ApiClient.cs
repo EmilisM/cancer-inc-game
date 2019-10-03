@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using GameClient.Api.ApiObjects;
-using GameClient.GameObjects.Tower;
 using GameClient.Helpers;
 
 namespace GameClient.Api
@@ -14,18 +14,37 @@ namespace GameClient.Api
             BaseAddress = new Uri("https://cancerincgameserver.azurewebsites.net/api/")
         };
 
-        public static IEnumerable<Class> GetClasses(string className = "")
+        public static IEnumerable<ApiClass> GetClasses(string className = "")
         {
             var classes = Client.GetStringAsync($"class?name={className}");
 
-            return JsonHelper.Deserialize<List<Class>>(classes.Result);
+            return JsonHelper.Deserialize<List<ApiClass>>(classes.Result);
         }
 
-        public static IEnumerable<Tower> GetTowers(string towerName = "")
+        public static IEnumerable<ApiTower> GetTowers(string towerName = "")
         {
-            var towers = Client.GetStringAsync($"tower?name={towerName}");
+            var towerContent = Client.GetStringAsync($"tower?name={towerName}");
 
-            return JsonHelper.Deserialize<List<Tower>>(towers.Result);
+            var towers = JsonHelper.Deserialize<List<ApiTower>>(towerContent.Result);
+
+            var attackTypes = GetAttackTypes().ToList();
+
+            foreach (var tower in towers)
+            {
+                var types = attackTypes.Where(attackType => attackType.TowerId == tower.Id).Select(attackType =>
+                    new ApiType { Id = attackType.AttackType.Id, Name = attackType.AttackType.Name }).ToList();
+
+                tower.AttackType = types.Count == 0 ? null : types;
+            }
+
+            return towers;
+        }
+
+        private static IEnumerable<ApiAttackType> GetAttackTypes()
+        {
+            var towers = Client.GetStringAsync("attacktype");
+
+            return JsonHelper.Deserialize<List<ApiAttackType>>(towers.Result);
         }
     }
 }

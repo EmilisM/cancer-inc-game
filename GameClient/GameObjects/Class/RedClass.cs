@@ -1,4 +1,6 @@
-﻿namespace GameClient.GameObjects.Class
+﻿using GameClient.GameObjects.Types;
+
+namespace GameClient.GameObjects.Class
 {
     public class RedClass : IClass
     {
