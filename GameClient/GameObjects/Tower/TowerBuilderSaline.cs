@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿﻿using System.Collections.Generic;
 using System.Linq;
 using GameClient.Api.ApiObjects;
 
 namespace GameClient.GameObjects.Tower
 {
-    public class SalineTowerBuilder : ITowerBuilder
+    public class TowerBuilderSaline : ITowerBuilder
     {
         private readonly Tower _tower;
 
-        public SalineTowerBuilder()
+        public TowerBuilderSaline()
         {
             _tower = new Tower();
         }
