@@ -1,13 +1,12 @@
 ﻿using System;
-using GameClient.Providers.GameData;
 
-namespace GameClient.Observers
+namespace GameClient.Observers.GameData
 {
-    public class GameDataReporter : IObserver<GameData>
+    public class GameDataObserver : IObserver<Providers.GameData.GameData>
     {
         private IDisposable _unsubscriber;
 
-        public virtual void Subscribe(IObservable<GameData> provider)
+        public virtual void Subscribe(IObservable<Providers.GameData.GameData> provider)
         {
             _unsubscriber = provider.Subscribe(this);
         }
@@ -25,7 +24,7 @@ namespace GameClient.Observers
         {
         }
 
-        public void OnNext(GameData value)
+        public void OnNext(Providers.GameData.GameData value)
         {
             //Do something with that data
         }
