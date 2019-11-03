@@ -32,7 +32,7 @@ namespace GameClient.GameObjects.MainMenu.Service
 
             mainMenuGrid.Margin = new Thickness(50, 50, 0, 0);
             mainMenuGrid.Visibility = Visibility.Hidden;
-            mainMenuGrid.Name = Name.MainMenu.ToString();
+            mainMenuGrid.Name = GameObjectName.MainMenu.ToString();
 
             return mainMenuGrid;
         }

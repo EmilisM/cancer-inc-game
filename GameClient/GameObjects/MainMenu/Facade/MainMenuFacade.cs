@@ -23,6 +23,8 @@ namespace GameClient.GameObjects.MainMenu.Facade
 
         public UIElement GetMainMenu()
         {
+            MainWindow.CompositeLogger.LogMessage("MainMenuFacade.GetMainMenu called");
+
             var playButton = new PlayMainMenuButton();
             playButton.Click += (sender, args) => _mainMenuInvoker.Play();
 

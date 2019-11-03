@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using GameClient.GameObjects.Logger;
 using GameClient.GameObjects.MainMenu.Command;
 using GameClient.GameObjects.MainMenu.Facade;
 
@@ -10,6 +12,8 @@ namespace GameClient
     {
         private MainMenuInvoker _mainMenuInvoker;
         private MainMenuFacade _mainMenuFacade;
+
+        public static CompositeLogger CompositeLogger;
 
         public static Canvas GameViewCanvas { get; private set; }
         public static ListBox LogList { get; private set; }
@@ -23,10 +27,19 @@ namespace GameClient
             LogList = LoggerList;
 
             InitializeCommands();
+            InitializeLogger();
 
             GameViewCanvas.Background = Brushes.Black;
 
             ShowMainMenu();
+        }
+
+        private static void InitializeLogger()
+        {
+            CompositeLogger = new CompositeLogger(new List<ILogger>
+            {
+                new ConsoleLogger()
+            });
         }
 
         private void ShowMainMenu()

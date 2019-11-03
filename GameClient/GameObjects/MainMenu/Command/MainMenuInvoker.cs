@@ -20,21 +20,25 @@ namespace GameClient.GameObjects.MainMenu.Command
         public void Play()
         {
             _playCommand.Execute();
+            MainWindow.CompositeLogger.LogMessage("MainMenuInvoker Play");
         }
 
         public void Exit()
         {
             _exitCommand.Execute();
+            MainWindow.CompositeLogger.LogMessage("MainMenuInvoker Exit");
         }
 
         public void Show()
         {
             _showCommand.Execute();
+            MainWindow.CompositeLogger.LogMessage("MainMenuInvoker Show");
         }
 
         public void Hide()
         {
             _hideCommand.Execute();
+            MainWindow.CompositeLogger.LogMessage("MainMenuInvoker Hide");
         }
     }
 }
