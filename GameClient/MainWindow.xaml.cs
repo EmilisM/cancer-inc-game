@@ -2,9 +2,11 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using GameClient.GameObjects.Class;
 using GameClient.GameObjects.Logger;
 using GameClient.GameObjects.MainMenu.Command;
 using GameClient.GameObjects.MainMenu.Facade;
+using GameClient.GameObjects.Types;
 
 namespace GameClient
 {
@@ -17,8 +19,9 @@ namespace GameClient
 
         public static Canvas GameViewCanvas { get; private set; }
         public static ListBox LogList { get; private set; }
-
         public static UIElement MainMenu { get; private set; }
+
+        public static List<IClass> Classes;
 
         public MainWindow()
         {
@@ -31,7 +34,24 @@ namespace GameClient
 
             GameViewCanvas.Background = Brushes.Black;
 
+            InitializeGameObjects();
+        }
+
+        private void InitializeGameObjects()
+        {
             ShowMainMenu();
+
+            var classFactory = new ClassFactory();
+
+            Classes = new List<IClass>
+            {
+                classFactory.GetClass(ClassType.White),
+                classFactory.GetClass(ClassType.Red),
+                classFactory.GetClass(ClassType.Yellow),
+                classFactory.GetClass(ClassType.Green)
+            };
+
+
         }
 
         private static void InitializeLogger()

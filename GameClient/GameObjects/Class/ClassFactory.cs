@@ -1,14 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GameClient.Api;
+using GameClient.Api.ApiObjects;
 using GameClient.GameObjects.Types;
 
 namespace GameClient.GameObjects.Class
 {
-    public static class ClassFactory
+    public class ClassFactory
     {
-        public static IClass GetClass(ClassType type)
+        private readonly IEnumerable<ApiClass> _classes;
+
+        public ClassFactory()
         {
+            _classes = ApiClient.GetClasses();
+        }
+
+        public IClass GetClass(ClassType type)
+        {
+            MainWindow.CompositeLogger.LogMessage($"ClassFactory.GetClass called {type}");
             IClass classResult;
 
             switch (type)
@@ -29,7 +39,7 @@ namespace GameClient.GameObjects.Class
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
 
-            var result = ApiClient.GetClasses(type.ToString()).FirstOrDefault();
+            var result = _classes.FirstOrDefault(c => c.Name == type.ToString());
 
             if (result == null)
             {
