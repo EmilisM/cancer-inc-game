@@ -15,5 +15,10 @@ namespace GameClient.GameObjects.MainMenu.Command
         {
             _receiver.Show();
         }
+
+        public void Undo()
+        {
+            _receiver.Hide();
+        }
     }
 }

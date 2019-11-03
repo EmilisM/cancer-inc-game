@@ -12,12 +12,15 @@ namespace GameClient
         private MainMenuFacade _mainMenuFacade;
 
         public static Canvas GameViewCanvas { get; private set; }
+        public static ListBox LogList { get; private set; }
+
         public static UIElement MainMenu { get; private set; }
 
         public MainWindow()
         {
             InitializeComponent();
             GameViewCanvas = GameView;
+            LogList = LoggerList;
 
             InitializeCommands();
 

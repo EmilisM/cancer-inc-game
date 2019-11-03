@@ -4,16 +4,21 @@ namespace GameClient.GameObjects.MainMenu.Command
 {
     public class HideMainMenuCommand : ICommand
     {
-        private readonly IMainMenuReceiver _mainMenuReceiver;
+        private readonly IMainMenuReceiver _receiver;
 
         public HideMainMenuCommand(IMainMenuReceiver mainMenuReceiver)
         {
-            _mainMenuReceiver = mainMenuReceiver;
+            _receiver = mainMenuReceiver;
         }
 
         public void Execute()
         {
-            _mainMenuReceiver.Hide();
+            _receiver.Hide();
+        }
+
+        public void Undo()
+        {
+            _receiver.Show();
         }
     }
 }

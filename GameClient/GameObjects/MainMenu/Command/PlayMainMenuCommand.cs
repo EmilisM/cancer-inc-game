@@ -15,5 +15,10 @@ namespace GameClient.GameObjects.MainMenu.Command
         {
             _receiver.Play();
         }
+
+        public void Undo()
+        {
+            _receiver.Exit();
+        }
     }
 }
