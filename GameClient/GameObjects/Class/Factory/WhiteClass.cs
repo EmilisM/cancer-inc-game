@@ -1,14 +1,14 @@
 ﻿using GameClient.GameObjects.Types;
 
-namespace GameClient.GameObjects.Class
+namespace GameClient.GameObjects.Class.Factory
 {
-    public class GreenClass : IClass
+    public class WhiteClass : IClass
     {
         public ClassType Type { get; }
 
-        public GreenClass()
+        public WhiteClass()
         {
-            Type = ClassType.Green;
+            Type = ClassType.White;
         }
 
         public double DamageModifier { get; set; }

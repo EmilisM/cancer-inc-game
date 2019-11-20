@@ -1,6 +1,6 @@
 ﻿using GameClient.GameObjects.Types;
 
-namespace GameClient.GameObjects.Class
+namespace GameClient.GameObjects.Class.Factory
 {
     public interface IClass
     {

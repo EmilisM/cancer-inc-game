@@ -5,7 +5,7 @@ using GameClient.Api;
 using GameClient.Api.ApiObjects;
 using GameClient.GameObjects.Types;
 
-namespace GameClient.GameObjects.Class
+namespace GameClient.GameObjects.Class.Factory
 {
     public class ClassFactory
     {
