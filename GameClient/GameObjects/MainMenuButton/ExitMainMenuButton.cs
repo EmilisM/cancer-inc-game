@@ -4,7 +4,7 @@ namespace GameClient.GameObjects.MainMenuButton
 {
     public class ExitMainMenuButton : MainMenuButtonPrototype
     {
-        public ExitMainMenuButton() : base("Exit")
+        public ExitMainMenuButton() : base(MainMenuButtonType.Exit)
         {
         }
 

@@ -4,7 +4,7 @@ namespace GameClient.GameObjects.MainMenuButton
 {
     public class PlayMainMenuButton : MainMenuButtonPrototype
     {
-        public PlayMainMenuButton() : base("Play")
+        public PlayMainMenuButton() : base(MainMenuButtonType.Play)
         {
         }
 
