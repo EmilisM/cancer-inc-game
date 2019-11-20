@@ -3,8 +3,10 @@
     public enum GameObjectName
     {
         MainMenu,
+        MainMenuTitle,
         MainMenuButton,
         ClassSelectorMenu,
+        ClassSelectorMenuTitle,
         ClassSelectorMenuButton
     }
 }

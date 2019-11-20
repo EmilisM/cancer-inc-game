@@ -19,6 +19,7 @@ namespace GameClient.GameObjects.ClassSelectorMenu
         {
             var title = new Label
             {
+                Name = GameObjectName.ClassSelectorMenuTitle.ToString(),
                 Foreground = Brushes.White,
                 Content = "Select class",
                 FontSize = 28,

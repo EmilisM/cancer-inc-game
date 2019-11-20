@@ -19,6 +19,7 @@ namespace GameClient.GameObjects.MainMenu
         {
             var title = new Label
             {
+                Name = GameObjectName.MainMenuTitle.ToString(),
                 Foreground = Brushes.White,
                 Content = "Cancer tower defense",
                 FontSize = 28,
