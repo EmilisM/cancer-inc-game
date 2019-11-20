@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using GameClient.Constants;
 
 namespace GameClient.GameObjects.Menu
 {
@@ -16,15 +17,15 @@ namespace GameClient.GameObjects.Menu
         {
             var menuGrid = new Grid
             {
-                Margin = new Thickness(50, 50, 0, 0),
+                Margin = new Thickness(GameConstants.MainWindowWidth * 0.05, GameConstants.GameViewCanvasHeight * 0.05, 0, 0),
                 Visibility = Visibility.Hidden,
                 Name = GetObjectName().ToString()
             };
 
-            var columnDefinition = new ColumnDefinition { Width = new GridLength(400) };
+            var columnDefinition = new ColumnDefinition { Width = new GridLength(GameConstants.MainWindowWidth * 0.4) };
             menuGrid.ColumnDefinitions.Add(columnDefinition);
 
-            var rowTitleDefinition = new RowDefinition { Height = new GridLength(100) };
+            var rowTitleDefinition = new RowDefinition { Height = new GridLength(GameConstants.GameViewCanvasHeight * 0.16) };
             menuGrid.RowDefinitions.Add(rowTitleDefinition);
 
             var title = CreateMenuTitle();
@@ -37,7 +38,7 @@ namespace GameClient.GameObjects.Menu
             for (var index = 1; index <= buttons.Count; index++)
             {
                 var button = buttons[index - 1];
-                var rowDefinition = new RowDefinition { Height = new GridLength(100) };
+                var rowDefinition = new RowDefinition { Height = new GridLength(GameConstants.GameViewCanvasHeight * 0.16) };
                 menuGrid.RowDefinitions.Add(rowDefinition);
 
                 button.SetValue(Grid.RowProperty, index);

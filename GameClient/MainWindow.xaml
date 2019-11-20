@@ -4,17 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" ResizeMode="NoResize" Height="800" Width="1000">
+        Title="MainWindow" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="600" />
-            <RowDefinition Height="200" />
+            <RowDefinition Name="GameCanvasRowDefinition" />
+            <RowDefinition Name="LoggerRowDefinition" />
         </Grid.RowDefinitions>
-        <Canvas Height="600" Grid.Row="0" Name="GameView" />
-        <ListBox Name="LoggerList" Height="160" FontSize="12" VerticalAlignment="Top" Grid.Row="1"
+        <Canvas Grid.Row="0" Name="GameView" />
+        <ListBox Name="LoggerList" FontSize="12" VerticalAlignment="Top" Grid.Row="1"
                  ScrollViewer.VerticalScrollBarVisibility="Auto" />
     </Grid>
 </Window>
