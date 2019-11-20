@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace GameClient.GameObjects.MainMenu.Prototype
+namespace GameClient.GameObjects.MainMenuButton
 {
     public abstract class MainMenuButtonPrototype : Button
     {

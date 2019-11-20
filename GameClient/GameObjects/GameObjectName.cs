@@ -4,5 +4,7 @@
     {
         MainMenu,
         MainMenuButton,
+        ClassSelectorMenu,
+        ClassSelectorMenuButton
     }
 }

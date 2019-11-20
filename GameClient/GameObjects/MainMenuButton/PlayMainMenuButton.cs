@@ -1,7 +1,6 @@
-﻿using GameClient.GameObjects.MainMenu.Prototype;
-using GameClient.Helpers;
+﻿using GameClient.Helpers;
 
-namespace GameClient.GameObjects.MainMenu
+namespace GameClient.GameObjects.MainMenuButton
 {
     public class PlayMainMenuButton : MainMenuButtonPrototype
     {

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Markup;
 using System.Xml;
-using GameClient.GameObjects.MainMenu;
+using GameClient.GameObjects.MainMenuButton;
 
 namespace GameClient.Helpers
 {
@@ -9,7 +9,7 @@ namespace GameClient.Helpers
     {
         public static T DeepClone<T>(T source) where T : class
         {
-            string xamlWriter = XamlWriter.Save(source);
+            var xamlWriter = XamlWriter.Save(source);
 
             var stringReader = new StringReader(xamlWriter);
             var xmlReader = XmlReader.Create(stringReader);

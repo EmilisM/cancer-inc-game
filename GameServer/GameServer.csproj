@@ -4,12 +4,12 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <UserSecretsId>ca1c0981-19e5-4213-a304-a58bae0f6e18</UserSecretsId>
-    <ApplicationInsightsResourceId>/subscriptions/5b6ba39f-7551-4193-95dd-3dd01ac5bd69/resourcegroups/CancerIncGameServer20190928043308ResourceGroup/providers/microsoft.insights/components/CancerIncGameServer</ApplicationInsightsResourceId>
+    <ApplicationInsightsResourceId>/subscriptions/bf247031-8b27-4a5d-a468-f04f05805e5a/resourcegroups/CancerIncResourceGroup/providers/microsoft.insights/components/cancerincserver</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/5b6ba39f-7551-4193-95dd-3dd01ac5bd69/resourcegroups/CancerIncGameServer20190928043308ResourceGroup/providers/microsoft.insights/components/CancerIncGameServer</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.8.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.8.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>

@@ -10,7 +10,7 @@ namespace GameClient.Api
     {
         private static readonly HttpClient Client = new HttpClient
         {
-            BaseAddress = new Uri("https://cancerincgameserver.azurewebsites.net/api/")
+            BaseAddress = new Uri("https://cancerincserver.azurewebsites.net/api/")
         };
 
         public static IEnumerable<ApiClass> GetClasses(string className = "")

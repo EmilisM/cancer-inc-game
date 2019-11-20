@@ -1,6 +1,6 @@
-﻿using GameClient.GameObjects.MainMenu.Prototype;
+﻿using GameClient.Helpers;
 
-namespace GameClient.GameObjects.MainMenu
+namespace GameClient.GameObjects.MainMenuButton
 {
     public class ExitMainMenuButton : MainMenuButtonPrototype
     {
@@ -10,12 +10,12 @@ namespace GameClient.GameObjects.MainMenu
 
         public override MainMenuButtonPrototype ShallowClone()
         {
-            throw new System.NotImplementedException();
+            return MemberwiseClone() as ExitMainMenuButton;
         }
 
         public override MainMenuButtonPrototype DeepClone()
         {
-            throw new System.NotImplementedException();
+            return XamlObjectHelper.DeepClone(this);
         }
     }
 }

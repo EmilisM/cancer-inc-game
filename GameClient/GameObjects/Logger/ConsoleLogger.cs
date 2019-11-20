@@ -11,7 +11,7 @@ namespace GameClient.GameObjects.Logger
                 Content = msg
             };
 
-            MainWindow.LogList.Items.Add(logItem);
+            MainWindow.Logger.Items.Add(logItem);
         }
     }
 }

@@ -7,6 +7,7 @@ namespace GameClient.GameObjects.MainMenu.Command
         public void Play()
         {
             MainWindow.MainMenu.Visibility = Visibility.Hidden;
+            MainWindow.ClassSelectorMenu.Visibility = Visibility.Visible;
             MainWindow.CompositeLogger.LogMessage("MainMenuReceiver Play");
         }
 
