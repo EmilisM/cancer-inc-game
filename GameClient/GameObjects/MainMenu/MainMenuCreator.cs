@@ -34,10 +34,8 @@ namespace GameClient.GameObjects.MainMenu
             var receiver = new MainMenuReceiver();
             var playCommand = new PlayMainMenuCommand(receiver);
             var exitCommand = new ExitMainMenuCommand(receiver);
-            var hideCommand = new HideMainMenuCommand(receiver);
-            var showCommand = new ShowMainMenuCommand(receiver);
 
-            var invoker = new MainMenuInvoker(playCommand, exitCommand, hideCommand, showCommand);
+            var invoker = new MainMenuInvoker(playCommand, exitCommand);
 
             var exitMainMenuButton = new ExitMainMenuButton();
             exitMainMenuButton.Click += (sender, args) => invoker.Exit();

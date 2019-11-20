@@ -16,17 +16,5 @@ namespace GameClient.GameObjects.MainMenu.Command
             Application.Current.Shutdown();
             MainWindow.CompositeLogger.LogMessage("MainMenuReceiver Exit");
         }
-
-        public void Hide()
-        {
-            MainWindow.MainMenu.Visibility = Visibility.Hidden;
-            MainWindow.CompositeLogger.LogMessage("MainMenuReceiver Hide");
-        }
-
-        public void Show()
-        {
-            MainWindow.MainMenu.Visibility = Visibility.Visible;
-            MainWindow.CompositeLogger.LogMessage("MainMenuReceiver Show");
-        }
     }
 }

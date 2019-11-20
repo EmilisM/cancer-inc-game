@@ -4,8 +4,5 @@
     {
         void Play();
         void Exit();
-
-        void Show();
-        void Hide();
     }
 }

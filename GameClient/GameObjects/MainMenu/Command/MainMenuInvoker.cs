@@ -6,15 +6,11 @@ namespace GameClient.GameObjects.MainMenu.Command
     {
         private readonly ICommand _playCommand;
         private readonly ICommand _exitCommand;
-        private readonly ICommand _hideCommand;
-        private readonly ICommand _showCommand;
 
-        public MainMenuInvoker(ICommand playCommand, ICommand exitCommand, ICommand hideCommand, ICommand showCommand)
+        public MainMenuInvoker(ICommand playCommand, ICommand exitCommand)
         {
             _playCommand = playCommand;
             _exitCommand = exitCommand;
-            _hideCommand = hideCommand;
-            _showCommand = showCommand;
         }
 
         public void Play()
@@ -27,18 +23,6 @@ namespace GameClient.GameObjects.MainMenu.Command
         {
             _exitCommand.Execute();
             MainWindow.CompositeLogger.LogMessage("MainMenuInvoker Exit");
-        }
-
-        public void Show()
-        {
-            _showCommand.Execute();
-            MainWindow.CompositeLogger.LogMessage("MainMenuInvoker Show");
-        }
-
-        public void Hide()
-        {
-            _hideCommand.Execute();
-            MainWindow.CompositeLogger.LogMessage("MainMenuInvoker Hide");
         }
     }
 }
