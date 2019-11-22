@@ -21,6 +21,13 @@ namespace GameClient
         public static Grid MainMenu { get; set; }
         public static Grid ClassSelectorMenu { get; set; }
 
+        public static Grid GameUi { get; set; }
+        public static Border GameGrid { get; set; }
+        public static Grid GameStats { get; set; }
+
+        public static Label HealthLabel { get; set; }
+        public static Label MoneyLabel { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();

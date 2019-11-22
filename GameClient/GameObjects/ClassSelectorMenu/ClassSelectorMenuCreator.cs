@@ -29,14 +29,32 @@ namespace GameClient.GameObjects.ClassSelectorMenu
             return title;
         }
 
+        private static void OnButtonClick()
+        {
+            MainWindow.ClassSelectorMenu.Visibility = Visibility.Hidden;
+            MainWindow.GameUi.Visibility = Visibility.Visible;
+        }
+
         protected override List<Button> CreateMenuButtons()
         {
+            var greenClassButton = new ClassSelectorButton(ClassType.Green);
+            greenClassButton.Click += (sender, args) => OnButtonClick();
+
+            var yellowClassButton = new ClassSelectorButton(ClassType.Yellow);
+            yellowClassButton.Click += (sender, args) => OnButtonClick();
+
+            var whiteClassButton = new ClassSelectorButton(ClassType.White);
+            whiteClassButton.Click += (sender, args) => OnButtonClick();
+
+            var redClassButton = new ClassSelectorButton(ClassType.Red);
+            redClassButton.Click += (sender, args) => OnButtonClick();
+
             return new List<Button>
             {
-                new ClassSelectorButton(ClassType.Green),
-                new ClassSelectorButton(ClassType.Yellow),
-                new ClassSelectorButton(ClassType.White),
-                new ClassSelectorButton(ClassType.Red)
+                greenClassButton,
+                yellowClassButton,
+                whiteClassButton,
+                redClassButton
             };
         }
     }
