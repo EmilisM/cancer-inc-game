@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using GameClient.GameObjects.ClassSelectorMenuButton;
 using GameClient.GameObjects.Menu;
-using GameClient.GameObjects.Types;
 
 namespace GameClient.GameObjects.ClassSelectorMenu
 {
@@ -37,25 +37,16 @@ namespace GameClient.GameObjects.ClassSelectorMenu
 
         protected override List<Button> CreateMenuButtons()
         {
-            var greenClassButton = new ClassSelectorButton(ClassType.Green);
-            greenClassButton.Click += (sender, args) => OnButtonClick();
+            var buttonList = new List<Button>();
 
-            var yellowClassButton = new ClassSelectorButton(ClassType.Yellow);
-            yellowClassButton.Click += (sender, args) => OnButtonClick();
-
-            var whiteClassButton = new ClassSelectorButton(ClassType.White);
-            whiteClassButton.Click += (sender, args) => OnButtonClick();
-
-            var redClassButton = new ClassSelectorButton(ClassType.Red);
-            redClassButton.Click += (sender, args) => OnButtonClick();
-
-            return new List<Button>
+            foreach (var classButton in MainWindow.Classes.Select(classObject => new ClassSelectorButton(classObject.Type)))
             {
-                greenClassButton,
-                yellowClassButton,
-                whiteClassButton,
-                redClassButton
-            };
+                classButton.Click += (sender, args) => OnButtonClick();
+
+                buttonList.Add(classButton);
+            }
+
+            return buttonList;
         }
     }
 }

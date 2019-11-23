@@ -13,7 +13,8 @@ namespace GameClient.GameObjects.Class.Factory
 
         public ClassFactory()
         {
-            _classes = ApiClient.GetClasses();
+            IApiClient client = new ApiClientProxy();
+            _classes = client.GetClasses();
         }
 
         public IClass GetClass(ClassType type)
@@ -50,6 +51,19 @@ namespace GameClient.GameObjects.Class.Factory
             classResult.SpeedModifier = result.SpeedModifier;
 
             return classResult;
+        }
+
+        public List<IClass> GetClasses()
+        {
+            MainWindow.CompositeLogger.LogMessage("ClassFactory.GetClasses called ");
+
+            return new List<IClass>
+            {
+                GetClass(ClassType.Green),
+                GetClass(ClassType.Red),
+                GetClass(ClassType.White),
+                GetClass(ClassType.Yellow)
+            };
         }
     }
 }

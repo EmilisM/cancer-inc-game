@@ -41,7 +41,7 @@ namespace GameServer.Controllers
         }
 
         [HttpGet("{id}/type")]
-        public async Task<ActionResult<Tower>> GetType(int id)
+        public async Task<ActionResult<TowerAttackType>> GetType(int id)
         {
             var attackTypes = await _dbContext.TowerAttackType
                 .Include(attackType => attackType.AttackType)

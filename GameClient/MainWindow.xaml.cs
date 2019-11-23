@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using GameClient.Constants;
+using GameClient.GameObjects.Class.Factory;
 using GameClient.GameObjects.GameViewCanvas;
 using GameClient.GameObjects.Logger;
 
@@ -28,6 +29,8 @@ namespace GameClient
         public static Label HealthLabel { get; set; }
         public static Label MoneyLabel { get; set; }
 
+        public static List<IClass> Classes { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,6 +45,7 @@ namespace GameClient
             InitializeLogger();
 
             var gameViewCanvasFacade = new GameViewCanvasFacade();
+            gameViewCanvasFacade.AddApiGameObjects();
             gameViewCanvasFacade.AddGameObjects();
 
             MainMenu.Visibility = Visibility.Visible;

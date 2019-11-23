@@ -11,8 +11,10 @@ namespace GameClient.GameObjects.Tower
 
         public TowerDirector()
         {
-            _towers = ApiClient.GetTowers();
-            _attackType = ApiClient.GetTowerAttackTypes();
+            IApiClient client = new ApiClientProxy();
+
+            _towers = client.GetTowers();
+            _attackType = client.GetAttackTypes();
         }
 
         public Tower Construct(ITowerBuilder builder)
