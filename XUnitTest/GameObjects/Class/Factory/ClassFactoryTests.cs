@@ -1,10 +1,17 @@
-﻿using System;
+﻿using Xunit;
+using GameClient.GameObjects.Class.Factory;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace XUnitTest.GameObjects.Class.Factory
+namespace GameClient.GameObjects.Class.Factory.Tests
 {
-    class ClassFactoryTests
+    public class ClassFactoryTests
     {
+        [Fact()]
+        public void GetClassTest()
+        {
+            Assert.True(false, "This test needs an implementation");
+        }
     }
 }

@@ -1,10 +1,17 @@
-﻿using System;
+﻿using Xunit;
+using GameClient.GameObjects.Tower;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace XUnitTest.GameObjects.Tower
+namespace GameClient.GameObjects.Tower.Tests
 {
-    class TowerBuilderBoomerangTests
+    public class TowerBuilderBoomerangTests
     {
+        [Fact()]
+        public void BuildTowerTest()
+        {
+            Assert.True(false, "This test needs an implementation");
+        }
     }
 }

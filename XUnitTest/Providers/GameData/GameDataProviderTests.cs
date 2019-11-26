@@ -1,10 +1,17 @@
-﻿using System;
+﻿using Xunit;
+using GameClient.Providers.GameData;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace XUnitTest.Providers.GameData
+namespace GameClient.Providers.GameData.Tests
 {
-    class GameDataProviderTests
+    public class GameDataProviderTests
     {
+        [Fact()]
+        public void GameDataProviderTest()
+        {
+            Assert.True(false, "This test needs an implementation");
+        }
     }
 }

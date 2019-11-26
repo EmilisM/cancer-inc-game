@@ -30,26 +30,5 @@ namespace XUnitTest
             Assert.Equal(_instance.ContextId, _instance2.ContextId);
 
         }
-        [Fact]
-        public void GameConstantsTest()
-        {
-            double MainWindowHeight = 776;
-            double MainWindowWidth = 976;
-            double GameViewCanvasHeight = 576;
-            double LoggerRowDefinition = 200;
-            double LoggerHeight = 160;
-            Assert.Equal(MainWindowHeight, GameClient.Constants.GameConstants.MainWindowHeight);
-            Assert.Equal(MainWindowWidth, GameClient.Constants.GameConstants.MainWindowWidth);
-            Assert.Equal(GameViewCanvasHeight, GameClient.Constants.GameConstants.GameViewCanvasHeight);
-            Assert.Equal(LoggerRowDefinition, GameClient.Constants.GameConstants.LoggerRowDefinition);
-            Assert.Equal(LoggerHeight, GameClient.Constants.GameConstants.LoggerHeight);
-        }
-        [Fact]
-        public void GreenClassTest()
-        {
-            GameClient.GameObjects.Class.Factory.ClassFactory factory = new GameClient.GameObjects.Class.Factory.ClassFactory();
-            var temp = factory.GetClass(GameClient.GameObjects.Types.ClassType.Green);
-
-        }
     }
 }

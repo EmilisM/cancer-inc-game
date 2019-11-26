@@ -1,10 +1,17 @@
-﻿using System;
+﻿using Xunit;
+using GameClient.GameObjects.Menu;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace XUnitTest.GameObjects.Menu
+namespace GameClient.GameObjects.Menu.Tests
 {
-    class MenuCreatorTemplateTests
+    public class MenuCreatorTemplateTests
     {
+        [Fact()]
+        public void CreateMenuTest()
+        {
+            Assert.True(false, "This test needs an implementation");
+        }
     }
 }
