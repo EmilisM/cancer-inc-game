@@ -16,19 +16,7 @@ namespace GameClient.GameObjects.Tower.Tests
             director.Construct(builder);
             GameClient.GameObjects.Tower.Tower tower = builder.GetTower();
             string name = "Bazooka";
-            Assert.Equal(tower.Name, name);
-        }
-
-        [Fact()]
-        public void BuildTowerTest()
-        {
-            Assert.True(false, "This test needs an implementation");
-        }
-
-        [Fact()]
-        public void GetTowerTest()
-        {
-            Assert.True(false, "This test needs an implementation");
+            Assert.Equal(name, tower.Name);
         }
     }
 }
