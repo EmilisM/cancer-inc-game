@@ -9,6 +9,24 @@ namespace GameClient.Api.Tests
 {
     public class UnitTests
     {
+        public async void GetAttackTypesTest()
+        {
+            string baseUrl = "https://cancerincserver.azurewebsites.net/api/attacktype";
+
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage res = await client.GetAsync(baseUrl))
+                    {
+                        using (HttpContent content = res.Content)
+                        {
+                            var data = await content.ReadAsStringAsync();
+                            Assert.NotNull(data);
+                        }
+                    }
+                }
+            }
+        }
         [Fact()]
         public async void GetClassesTest()
         {
