@@ -12,7 +12,7 @@ namespace GameClient.Api
         ApiEnemy GetEnemy(int id);
         IEnumerable<ApiType> GetEnemyTypes(int id);
         IEnumerable<ApiType> GetAllEnemyTypes();
-        IEnumerable<ApiTower> GetTowers(string towerName = "");
+        IEnumerable<ApiTower> GetTowers();
         ApiTower GetTower(int id);
         IEnumerable<ApiAttackType> GetTowerAttackTypes(int id);
         IEnumerable<ApiType> GetTypes();

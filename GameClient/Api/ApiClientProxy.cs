@@ -47,9 +47,9 @@ namespace GameClient.Api
             return _client.GetAllEnemyTypes();
         }
 
-        public IEnumerable<ApiTower> GetTowers(string towerName = "")
+        public IEnumerable<ApiTower> GetTowers()
         {
-            return _client.GetTowers(towerName);
+            return _client.GetTowers();
         }
 
         public ApiTower GetTower(int id)
