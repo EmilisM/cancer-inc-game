@@ -49,7 +49,7 @@ namespace XUnitTest
         {
             GameClient.GameObjects.Class.Factory.ClassFactory factory = new GameClient.GameObjects.Class.Factory.ClassFactory();
             var temp = factory.GetClass(GameClient.GameObjects.Types.ClassType.Green);
-            Console.WriteLine(temp);
+
         }
     }
 }
