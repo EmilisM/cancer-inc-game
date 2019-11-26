@@ -11,7 +11,12 @@ namespace GameClient.GameObjects.Tower.Tests
         [Fact()]
         public void BuildTowerTest()
         {
-            Assert.True(false, "This test needs an implementation");
+            GameClient.GameObjects.Tower.TowerBuilderCannon builder = new GameClient.GameObjects.Tower.TowerBuilderCannon();
+            GameClient.GameObjects.Tower.TowerDirector director = new GameClient.GameObjects.Tower.TowerDirector();
+            director.Construct(builder);
+            GameClient.GameObjects.Tower.Tower tower = builder.GetTower();
+            string name = "Cannon";
+            Assert.Equal(tower.Name, name);
         }
     }
 }
