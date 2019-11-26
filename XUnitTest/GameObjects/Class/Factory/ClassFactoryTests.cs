@@ -11,7 +11,9 @@ namespace GameClient.GameObjects.Class.Factory.Tests
         [Fact()]
         public void GetClassTest()
         {
-            Assert.True(false, "This test needs an implementation");
+            GameClient.GameObjects.Class.Factory.ClassFactory factory = new GameClient.GameObjects.Class.Factory.ClassFactory();
+            string expected = "Green";
+            Assert.NotNull(factory.GetClass(GameClient.GameObjects.Types.ClassType.Green));
         }
     }
 }

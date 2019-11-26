@@ -16,7 +16,7 @@ namespace GameClient.GameObjects.Tower.Tests
             director.Construct(builder);
             GameClient.GameObjects.Tower.Tower tower = builder.GetTower();
             string name = "Cannon";
-            Assert.Equal(tower.Name, name);
+            Assert.Equal(name, tower.Name);
         }
     }
 }
