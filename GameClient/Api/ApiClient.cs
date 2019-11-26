@@ -20,9 +20,9 @@ namespace GameClient.Api
             return JsonHelper.Deserialize<List<ApiAttackType>>(attackTypes.Result);
         }
 
-        public IEnumerable<ApiClass> GetClasses(string className = "")
+        public IEnumerable<ApiClass> GetClasses()
         {
-            var classes = Client.GetStringAsync($"class?name={className}");
+            var classes = Client.GetStringAsync("class");
 
             return JsonHelper.Deserialize<List<ApiClass>>(classes.Result);
         }

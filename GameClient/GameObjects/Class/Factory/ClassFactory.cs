@@ -19,7 +19,7 @@ namespace GameClient.GameObjects.Class.Factory
 
         public IClass GetClass(ClassType type)
         {
-            MainWindow.CompositeLogger.LogMessage($"ClassFactory.GetClass called {type}");
+            //MainWindow.CompositeLogger.LogMessage($"ClassFactory.GetClass called {type}");
             IClass classResult;
 
             switch (type)

@@ -17,9 +17,9 @@ namespace GameClient.Api
             return _client.GetAttackTypes();
         }
 
-        public IEnumerable<ApiClass> GetClasses(string className = "")
+        public IEnumerable<ApiClass> GetClasses()
         {
-            return _client.GetClasses(className);
+            return _client.GetClasses();
         }
 
         public ApiClass GetClass(int id)

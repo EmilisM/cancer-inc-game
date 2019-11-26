@@ -6,7 +6,7 @@ namespace GameClient.Api
     public interface IApiClient
     {
         IEnumerable<ApiAttackType> GetAttackTypes();
-        IEnumerable<ApiClass> GetClasses(string className = "");
+        IEnumerable<ApiClass> GetClasses();
         ApiClass GetClass(int id);
         IEnumerable<ApiEnemy> GetEnemies();
         ApiEnemy GetEnemy(int id);
