@@ -61,9 +61,9 @@ namespace GameClient.Api
             return JsonHelper.Deserialize<List<ApiType>>(types.Result);
         }
 
-        public IEnumerable<ApiTower> GetTowers(string towerName = "")
+        public IEnumerable<ApiTower> GetTowers()
         {
-            var towerContent = Client.GetStringAsync($"tower?name={towerName}");
+            var towerContent = Client.GetStringAsync("tower");
 
             return JsonHelper.Deserialize<List<ApiTower>>(towerContent.Result);
         }
