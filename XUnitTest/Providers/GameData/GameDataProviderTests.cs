@@ -17,7 +17,7 @@ namespace GameClient.Providers.GameData.Tests
             observerList.Add(observer1);
         GameClient.Providers.GameData.GameDataUnsubscriber unsubscriber = new GameClient.Providers.GameData.GameDataUnsubscriber(observerList, observer1);
             var temp = provider1.Subscribe(observer1);
-            Assert.Equal(unsubscriber, temp);
+            Assert.Equal(unsubscriber.ToString(), temp.ToString());
             
         }
     }
