@@ -9,7 +9,7 @@ namespace XUnitTest
     public class UnitTests
     {
         [Fact]
-        public void InstanceCountTest()
+        public void SingleInstanceTest()
         {
 
             GameServer.Entities.CancerIncGameBaseContext _instance = null;

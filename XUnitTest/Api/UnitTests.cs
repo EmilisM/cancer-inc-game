@@ -40,7 +40,9 @@ namespace GameClient.Api.Tests
                         using (HttpContent content = res.Content)
                         {
                             var data = await content.ReadAsStringAsync();
-                            var expected = "[{\"id\":1,\"name\":\"Red\",\"damageModifier\":2,\"speedModifier\":0.5},{\"id\":2,\"name\":\"White\",\"damageModifier\":0.5,\"speedModifier\":2},{\"id\":3,\"name\":\"Green\",\"damageModifier\":1,\"speedModifier\":1},{\"id\":4,\"name\":\"Yellow\",\"damageModifier\":1,\"speedModifier\":1}]";
+                            var expected = "[{\"id\":1,\"name\":\"Red\",\"damageModifier\":2,\"speedModifier\":0.5},{\"id\":2,\"name\":\"White\"," +
+                                "\"damageModifier\":0.5,\"speedModifier\":2},{\"id\":3,\"name\":\"Green\",\"damageModifier\":1,\"speedModifier\":1}," +
+                                "{\"id\":4,\"name\":\"Yellow\",\"damageModifier\":1,\"speedModifier\":1}]";
                             Assert.NotNull(data);
                             Assert.Equal(expected, data);
                         }
