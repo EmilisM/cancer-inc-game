@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using GameClient.Api;
 using GameClient.GameObjects.ClassSelectorMenuButton;
 using GameClient.GameObjects.Menu;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace GameClient.GameObjects.ClassSelectorMenu
 {
@@ -29,8 +30,10 @@ namespace GameClient.GameObjects.ClassSelectorMenu
             return title;
         }
 
-        private static void OnButtonClick()
+        private static void OnButtonClick(string classType)
         {
+            MainWindow.GameInfoHub.InvokeAsync(HubConstants.RegisterClient, classType);
+
             MainWindow.ClassSelectorMenu.Visibility = Visibility.Hidden;
             MainWindow.GameUi.Visibility = Visibility.Visible;
         }
@@ -39,9 +42,11 @@ namespace GameClient.GameObjects.ClassSelectorMenu
         {
             var buttonList = new List<Button>();
 
-            foreach (var classButton in MainWindow.Classes.Select(classObject => new ClassSelectorButton(classObject.Type)))
+            foreach (var classObject in MainWindow.Classes)
             {
-                classButton.Click += (sender, args) => OnButtonClick();
+                var classButton = new ClassSelectorButton(classObject.Type);
+
+                classButton.Click += (sender, args) => OnButtonClick(classObject.Type.ToString());
 
                 buttonList.Add(classButton);
             }

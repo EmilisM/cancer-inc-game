@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using GameServer.Hubs;
+using GameServer.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +23,9 @@ namespace GameServer
 
             services.AddApplicationInsightsTelemetry();
             services.AddApplicationInsightsTelemetry();
+            services.AddSignalR();
+
+            services.AddSingleton(new GameInfo());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +42,11 @@ namespace GameServer
 
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<GameInfoHub>("/game-hub");
+            });
         }
     }
 }

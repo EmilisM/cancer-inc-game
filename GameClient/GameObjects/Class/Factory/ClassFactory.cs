@@ -53,17 +53,19 @@ namespace GameClient.GameObjects.Class.Factory
             return classResult;
         }
 
-        public List<IClass> GetClasses()
+        public List<IClass> GetClasses(List<string> exceptList)
         {
             MainWindow.CompositeLogger.LogMessage("ClassFactory.GetClasses called ");
 
-            return new List<IClass>
+            var classes = new List<ClassType>
             {
-                GetClass(ClassType.Green),
-                GetClass(ClassType.Red),
-                GetClass(ClassType.White),
-                GetClass(ClassType.Yellow)
+                ClassType.Green,
+                ClassType.Red,
+                ClassType.White,
+                ClassType.Yellow
             };
+
+            return classes.Where(classObject => !exceptList.Contains(classObject.ToString())).Select(GetClass).ToList();
         }
     }
 }

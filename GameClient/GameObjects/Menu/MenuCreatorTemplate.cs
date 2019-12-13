@@ -18,7 +18,7 @@ namespace GameClient.GameObjects.Menu
             var menuGrid = new Grid
             {
                 Margin = new Thickness(GameConstants.MainWindowWidth * 0.05, GameConstants.GameViewCanvasHeight * 0.05, 0, 0),
-                Visibility = Visibility.Hidden,
+                Visibility = Visibility.Visible,
                 Name = GetObjectName().ToString()
             };
 

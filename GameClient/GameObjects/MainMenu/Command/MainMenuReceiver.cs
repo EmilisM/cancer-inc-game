@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using GameClient.Api;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace GameClient.GameObjects.MainMenu.Command
 {
@@ -7,7 +9,8 @@ namespace GameClient.GameObjects.MainMenu.Command
         public void Play()
         {
             MainWindow.MainMenu.Visibility = Visibility.Hidden;
-            MainWindow.ClassSelectorMenu.Visibility = Visibility.Visible;
+            MainWindow.GameInfoHub.InvokeAsync(HubConstants.NotifyClasses);
+
             MainWindow.CompositeLogger.LogMessage("MainMenuReceiver Play");
         }
 

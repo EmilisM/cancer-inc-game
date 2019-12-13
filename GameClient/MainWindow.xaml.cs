@@ -2,10 +2,12 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using GameClient.Api;
 using GameClient.Constants;
 using GameClient.GameObjects.Class.Factory;
 using GameClient.GameObjects.GameViewCanvas;
 using GameClient.GameObjects.Logger;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace GameClient
 {
@@ -31,6 +33,11 @@ namespace GameClient
 
         public static List<IClass> Classes { get; set; }
 
+        public static HubConnection GameInfoHub { get; set; }
+
+        private readonly GameViewCanvasFacade _gameViewCanvasFacade;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,13 +47,13 @@ namespace GameClient
             LoggerRow = LoggerRowDefinition;
             Logger = LoggerList;
 
+            ClientHubConnection();
             InitializeMainWindow();
             InitializeGameViewCanvas();
             InitializeLogger();
 
-            var gameViewCanvasFacade = new GameViewCanvasFacade();
-            gameViewCanvasFacade.AddApiGameObjects();
-            gameViewCanvasFacade.AddGameObjects();
+            _gameViewCanvasFacade = new GameViewCanvasFacade();
+            _gameViewCanvasFacade.AddGameObjects();
 
             MainMenu.Visibility = Visibility.Visible;
         }
@@ -74,6 +81,34 @@ namespace GameClient
             {
                 new ConsoleLogger()
             });
+        }
+
+        private void ClientHubConnection()
+        {
+            GameInfoHub = new HubConnectionBuilder()
+                .WithUrl(HubConstants.GameHub)
+                .Build();
+
+            GameInfoHub.StartAsync();
+
+            GameInfoHub.On<string>(HubConstants.RegisterReceive,
+                clientId =>
+                {
+                    Dispatcher?.Invoke(() =>
+                    {
+                        CompositeLogger.LogMessage(clientId);
+                    });
+                });
+
+            GameInfoHub.On<List<string>>(HubConstants.ClassesReceive,
+                list =>
+                {
+                    Dispatcher?.Invoke(() =>
+                    {
+                        _gameViewCanvasFacade.AddClasses(list);
+                        _gameViewCanvasFacade.AddGameMenu();
+                    });
+                });
         }
     }
 }
