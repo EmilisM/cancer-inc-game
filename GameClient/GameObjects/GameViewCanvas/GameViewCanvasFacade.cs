@@ -27,7 +27,7 @@ namespace GameClient.GameObjects.GameViewCanvas
             MainWindow.Classes = classes;
         }
 
-        public void AddGameMenu()
+        public void AddClassSelectorMenu()
         {
             var classSelectorMenu = _classSelectorMenuCreator.CreateMenu();
 
@@ -35,18 +35,22 @@ namespace GameClient.GameObjects.GameViewCanvas
             MainWindow.GameViewCanvas.Children.Add(classSelectorMenu);
         }
 
-        public void AddGameObjects()
+        public void AddMainMenu()
         {
             var mainMenu = _mainMenuCreator.CreateMenu();
 
+            MainWindow.MainMenu = mainMenu;
+            MainWindow.GameViewCanvas.Children.Add(mainMenu);
+        }
+
+        public void AddGameGrid()
+        {
             var gameStats = new GameStats();
             var gameGrid = new GameGrid();
             var gameUi = new GameUi(gameStats, gameGrid);
 
-            MainWindow.GameViewCanvas.Children.Add(mainMenu);
             MainWindow.GameViewCanvas.Children.Add(gameUi);
 
-            MainWindow.MainMenu = mainMenu;
             MainWindow.GameUi = gameUi;
             MainWindow.GameStats = gameStats;
             MainWindow.GameGrid = gameGrid;

@@ -25,7 +25,7 @@ namespace GameClient.GameObjects.GameInterface
             Children.Add(gameGrid);
             Children.Add(gameStats);
 
-            Visibility = Visibility.Hidden;
+            Visibility = Visibility.Visible;
         }
     }
 }

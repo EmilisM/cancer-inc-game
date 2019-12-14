@@ -35,7 +35,6 @@ namespace GameClient.GameObjects.ClassSelectorMenu
             MainWindow.GameInfoHub.InvokeAsync(HubConstants.RegisterClient, classType);
 
             MainWindow.ClassSelectorMenu.Visibility = Visibility.Hidden;
-            MainWindow.GameUi.Visibility = Visibility.Visible;
         }
 
         protected override List<Button> CreateMenuButtons()

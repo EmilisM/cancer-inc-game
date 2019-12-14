@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -30,10 +31,14 @@ namespace GameClient
 
         public static Label HealthLabel { get; set; }
         public static Label MoneyLabel { get; set; }
+        public static Label ClassLabel { get; set; }
 
         public static List<IClass> Classes { get; set; }
 
         public static HubConnection GameInfoHub { get; set; }
+
+        public static IClass SelectedClass { get; set; }
+
 
         private readonly GameViewCanvasFacade _gameViewCanvasFacade;
 
@@ -53,7 +58,7 @@ namespace GameClient
             InitializeLogger();
 
             _gameViewCanvasFacade = new GameViewCanvasFacade();
-            _gameViewCanvasFacade.AddGameObjects();
+            _gameViewCanvasFacade.AddMainMenu();
 
             MainMenu.Visibility = Visibility.Visible;
         }
@@ -91,12 +96,17 @@ namespace GameClient
 
             GameInfoHub.StartAsync();
 
-            GameInfoHub.On<string>(HubConstants.RegisterReceive,
-                clientId =>
+            GameInfoHub.On<string, string>(HubConstants.RegisterReceive,
+                (clientId, className) =>
                 {
                     Dispatcher?.Invoke(() =>
                     {
-                        CompositeLogger.LogMessage(clientId);
+                        SelectedClass = Classes.First(classObject => className == classObject.Type.ToString());
+
+                        CompositeLogger.LogMessage($"{SelectedClass.Type.ToString()} {clientId}");
+
+                        _gameViewCanvasFacade.AddGameGrid();
+                        ClassLabel.Content = SelectedClass.Type.ToString();
                     });
                 });
 
@@ -106,7 +116,7 @@ namespace GameClient
                     Dispatcher?.Invoke(() =>
                     {
                         _gameViewCanvasFacade.AddClasses(list);
-                        _gameViewCanvasFacade.AddGameMenu();
+                        _gameViewCanvasFacade.AddClassSelectorMenu();
                     });
                 });
         }

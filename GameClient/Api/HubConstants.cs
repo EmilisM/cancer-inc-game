@@ -2,7 +2,7 @@
 {
     public class HubConstants
     {
-        public const string GameHub = "https://localhost:44366/game-hub";
+        public const string GameHub = "https://cancerincserver.azurewebsites.net/game-hub";
 
         public const string RegisterReceive = "RegisterReceive";
 
@@ -11,5 +11,7 @@
         public const string RegisterClient = "RegisterClient";
 
         public const string NotifyClasses = "NotifyClasses";
+
+        public const string RemoveClient = "RemoveClient";
     }
 }

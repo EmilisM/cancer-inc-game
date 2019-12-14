@@ -41,8 +41,21 @@ namespace GameClient.GameObjects.GameInterface
             };
             MainWindow.MoneyLabel.SetValue(ColumnProperty, 1);
 
+
+            MainWindow.ClassLabel = new Label
+            {
+                Content = "None",
+                Foreground = Brushes.White,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                FontSize = 24,
+                ContentStringFormat = "Class {0}"
+            };
+            MainWindow.ClassLabel.SetValue(ColumnProperty, 2);
+
             Children.Add(MainWindow.HealthLabel);
             Children.Add(MainWindow.MoneyLabel);
+            Children.Add(MainWindow.ClassLabel);
         }
     }
 }

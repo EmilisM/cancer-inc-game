@@ -14,13 +14,23 @@ namespace GameServer.Hubs
             _gameInfo = gameInfo;
         }
 
+        public void RemoveClient()
+        {
+            var clientId = Context.ConnectionId;
+
+            if (_gameInfo.ClientClasses.ContainsKey(clientId))
+            {
+                _gameInfo.ClientClasses.Remove(clientId);
+            }
+        }
+
         public async Task RegisterClient(string className)
         {
             var clientId = Context.ConnectionId;
 
             if (_gameInfo.ClientClasses.TryAdd(clientId, className))
             {
-                await Clients.Caller.SendAsync("RegisterReceive", clientId);
+                await Clients.Caller.SendAsync("RegisterReceive", clientId, className);
             }
         }
 
