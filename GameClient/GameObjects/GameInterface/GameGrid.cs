@@ -32,6 +32,7 @@ namespace GameClient.GameObjects.GameInterface
 
             BorderBrush = Brushes.DarkGray;
             BorderThickness = new Thickness(2);
+            gameGrid.ShowGridLines = true;
 
             Child = gameGrid;
         }

@@ -6,9 +6,10 @@ namespace GameClient.GameObjects.GameInterface
 {
     public sealed class GameUi : Grid
     {
-        public GameUi(UIElement gameStats, UIElement gameGrid)
+        public GameUi(UIElement gameStats, UIElement gameGrid, UIElement towerSelector)
         {
-            var gameColumnDefinition = new ColumnDefinition { Width = new GridLength(GameConstants.MainWindowWidth - 16) };
+            var gameColumnDefinition = new ColumnDefinition
+                { Width = new GridLength(GameConstants.MainWindowWidth - 16) };
 
             var gameGridDefinition = new RowDefinition
                 { Height = new GridLength(GameConstants.GameViewCanvasHeight - 48) };
@@ -21,9 +22,11 @@ namespace GameClient.GameObjects.GameInterface
 
             gameGrid.SetValue(RowProperty, 0);
             gameStats.SetValue(RowProperty, 1);
+            towerSelector.SetValue(RowProperty, 1);
 
             Children.Add(gameGrid);
             Children.Add(gameStats);
+            Children.Add(towerSelector);
 
             Visibility = Visibility.Visible;
         }

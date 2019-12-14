@@ -13,6 +13,8 @@ namespace GameServer.Models
         public GameInfo()
         {
             ClientClasses = new Dictionary<string, string>();
+            Health = 100;
+            Money = 100;
         }
     }
 }

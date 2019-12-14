@@ -15,7 +15,7 @@ namespace GameClient.Api
 
         public IEnumerable<ApiAttackType> GetAttackTypes()
         {
-            var attackTypes = Client.GetStringAsync("attacktypes");
+            var attackTypes = Client.GetStringAsync("attacktype");
 
             return JsonHelper.Deserialize<List<ApiAttackType>>(attackTypes.Result);
         }

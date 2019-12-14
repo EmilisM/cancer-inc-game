@@ -30,7 +30,8 @@ namespace GameServer.Hubs
 
             if (_gameInfo.ClientClasses.TryAdd(clientId, className))
             {
-                await Clients.Caller.SendAsync("RegisterReceive", clientId, className);
+                await Clients.Caller.SendAsync("RegisterReceive", clientId, className, _gameInfo.Money,
+                    _gameInfo.Health);
             }
         }
 

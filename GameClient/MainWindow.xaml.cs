@@ -8,6 +8,7 @@ using GameClient.Constants;
 using GameClient.GameObjects.Class.Factory;
 using GameClient.GameObjects.GameViewCanvas;
 using GameClient.GameObjects.Logger;
+using GameClient.GameObjects.Tower;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace GameClient
@@ -26,8 +27,10 @@ namespace GameClient
         public static Grid ClassSelectorMenu { get; set; }
 
         public static Grid GameUi { get; set; }
-        public static Border GameGrid { get; set; }
+        public static Border GameGridBorder { get; set; }
+        public static Grid GameGrid { get; set; }
         public static Grid GameStats { get; set; }
+        public static Grid TowerSelector { get; set; }
 
         public static Label HealthLabel { get; set; }
         public static Label MoneyLabel { get; set; }
@@ -35,13 +38,13 @@ namespace GameClient
 
         public static List<IClass> Classes { get; set; }
 
+        public static List<Tower> Towers { get; set; }
+
         public static HubConnection GameInfoHub { get; set; }
 
         public static IClass SelectedClass { get; set; }
 
-
         private readonly GameViewCanvasFacade _gameViewCanvasFacade;
-
 
         public MainWindow()
         {
@@ -96,8 +99,8 @@ namespace GameClient
 
             GameInfoHub.StartAsync();
 
-            GameInfoHub.On<string, string>(HubConstants.RegisterReceive,
-                (clientId, className) =>
+            GameInfoHub.On<string, string, int, int>(HubConstants.RegisterReceive,
+                (clientId, className, health, money) =>
                 {
                     Dispatcher?.Invoke(() =>
                     {
@@ -105,8 +108,12 @@ namespace GameClient
 
                         CompositeLogger.LogMessage($"{SelectedClass.Type.ToString()} {clientId}");
 
+                        _gameViewCanvasFacade.AddTowers(SelectedClass);
                         _gameViewCanvasFacade.AddGameGrid();
                         ClassLabel.Content = SelectedClass.Type.ToString();
+
+                        GameViewCanvas.Children.Remove(MainMenu);
+                        GameViewCanvas.Children.Remove(ClassSelectorMenu);
                     });
                 });
 
