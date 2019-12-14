@@ -70,11 +70,11 @@ namespace GameClient.GameObjects.GameViewCanvas
             MainWindow.GameViewCanvas.Children.Add(mainMenu);
         }
 
-        public void AddGameGrid()
+        public static void AddGameGrid(List<List<string>> map)
         {
             var towerSelector = new TowerSelector();
             var gameStats = new GameStats();
-            var gameGrid = new GameGrid();
+            var gameGrid = new GameGrid(map);
             var gameUi = new GameUi(gameStats, gameGrid, towerSelector);
 
             MainWindow.GameViewCanvas.Children.Add(gameUi);

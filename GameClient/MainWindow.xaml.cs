@@ -37,12 +37,13 @@ namespace GameClient
         public static Label ClassLabel { get; set; }
 
         public static List<IClass> Classes { get; set; }
-
         public static List<Tower> Towers { get; set; }
 
         public static HubConnection GameInfoHub { get; set; }
 
         public static IClass SelectedClass { get; set; }
+
+        public static List<List<Label>> Map { get; set; }
 
         private readonly GameViewCanvasFacade _gameViewCanvasFacade;
 
@@ -99,8 +100,8 @@ namespace GameClient
 
             GameInfoHub.StartAsync();
 
-            GameInfoHub.On<string, string, int, int>(HubConstants.RegisterReceive,
-                (clientId, className, health, money) =>
+            GameInfoHub.On<string, string, int, int, List<List<string>>>(HubConstants.RegisterReceive,
+                (clientId, className, health, money, map) =>
                 {
                     Dispatcher?.Invoke(() =>
                     {
@@ -109,7 +110,7 @@ namespace GameClient
                         CompositeLogger.LogMessage($"{SelectedClass.Type.ToString()} {clientId}");
 
                         _gameViewCanvasFacade.AddTowers(SelectedClass);
-                        _gameViewCanvasFacade.AddGameGrid();
+                        GameViewCanvasFacade.AddGameGrid(map);
                         ClassLabel.Content = SelectedClass.Type.ToString();
 
                         GameViewCanvas.Children.Remove(MainMenu);

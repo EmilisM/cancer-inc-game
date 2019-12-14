@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -8,26 +8,43 @@ namespace GameClient.GameObjects.GameInterface
 {
     public sealed class GameGrid : Border
     {
-        public GameGrid()
+        public GameGrid(List<List<string>> map)
         {
             var gameGrid = new Grid();
 
-            const int rowHeight = 48;
-            const int columnWidth = 48;
-
-            var rowCount = Convert.ToInt32(Math.Floor(GameConstants.GameViewCanvasHeight / rowHeight)) - 1;
-            var columnCount = Convert.ToInt32(Math.Floor(GameConstants.MainWindowWidth / columnWidth));
-
-            for (var i = 0; i < rowCount; i++)
+            for (var i = 0; i < GameConstants.Rows; i++)
             {
-                var rowDefinition = new RowDefinition { Height = new GridLength(rowHeight) };
+                var rowDefinition = new RowDefinition { Height = new GridLength(GameConstants.RowHeight) };
                 gameGrid.RowDefinitions.Add(rowDefinition);
             }
 
-            for (var i = 0; i < columnCount; i++)
+            for (var i = 0; i < GameConstants.Columns; i++)
             {
-                var columnDefinition = new ColumnDefinition { Width = new GridLength(columnWidth) };
+                var columnDefinition = new ColumnDefinition { Width = new GridLength(GameConstants.ColumnWidth) };
                 gameGrid.ColumnDefinitions.Add(columnDefinition);
+            }
+
+            MainWindow.Map = new List<List<Label>>();
+
+            for (var i = 0; i < map.Count; i++)
+            {
+                var row = new List<Label>();
+                for (var j = 0; j < map[i].Count; j++)
+                {
+                    var label = new Label();
+                    row.Add(label);
+
+                    label.Background = map[i][j] == "Free"
+                        ? new SolidColorBrush(Color.FromRgb(18, 38, 59))
+                        : Brushes.Black;
+
+                    label.SetValue(Grid.RowProperty, i);
+                    label.SetValue(Grid.ColumnProperty, j);
+
+                    gameGrid.Children.Add(label);
+                }
+
+                MainWindow.Map.Add(row);
             }
 
             BorderBrush = Brushes.DarkGray;

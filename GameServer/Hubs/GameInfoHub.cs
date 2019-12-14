@@ -24,14 +24,19 @@ namespace GameServer.Hubs
             }
         }
 
-        public async Task RegisterClient(string className)
+        public async Task RegisterClient(string className, int rows, int columns)
         {
             var clientId = Context.ConnectionId;
+
+            if (_gameInfo.MapGrid == null)
+            {
+                _gameInfo.CreateMap(rows, columns);
+            }
 
             if (_gameInfo.ClientClasses.TryAdd(clientId, className))
             {
                 await Clients.Caller.SendAsync("RegisterReceive", clientId, className, _gameInfo.Money,
-                    _gameInfo.Health);
+                    _gameInfo.Health, _gameInfo.MapGrid);
             }
         }
 
@@ -40,6 +45,11 @@ namespace GameServer.Hubs
             var classList = _gameInfo.ClientClasses.Select(key => key.Value);
 
             await Clients.Caller.SendAsync("ClassesReceive", classList);
+        }
+
+        public async Task GameMap(string elementName, int index)
+        {
+            await Clients.All.SendAsync("NotifyMap", _gameInfo.MapGrid);
         }
 
         public override async Task OnConnectedAsync()
