@@ -16,7 +16,7 @@ namespace GameClient.GameObjects.Tower
 
         public void BuildTower(IEnumerable<ApiAttackType> attackTypes, IEnumerable<ApiTower> towers)
         {
-            var tower = towers.FirstOrDefault(t => t.Name.Contains(TowerName.ChemoLauncher.ToString()));
+            var tower = towers.FirstOrDefault(t => (int)TowerName.ChemoLauncher == t.Id);
 
             if (tower == null)
             {

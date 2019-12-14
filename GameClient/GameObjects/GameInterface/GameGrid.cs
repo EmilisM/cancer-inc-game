@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using GameClient.Constants;
 
@@ -41,6 +42,10 @@ namespace GameClient.GameObjects.GameInterface
                     label.SetValue(Grid.RowProperty, i);
                     label.SetValue(Grid.ColumnProperty, j);
 
+                    var i1 = i;
+                    var j1 = j;
+                    label.MouseLeftButtonDown += (sender, args) => LabelOnMouseLeftButtonDown(sender, args, i1, j1);
+
                     gameGrid.Children.Add(label);
                 }
 
@@ -52,6 +57,12 @@ namespace GameClient.GameObjects.GameInterface
             gameGrid.ShowGridLines = true;
 
             Child = gameGrid;
+        }
+
+        private void LabelOnMouseLeftButtonDown(object sender, MouseButtonEventArgs e, int row, int column)
+        {
+            MainWindow.GameStats.Visibility = Visibility.Hidden;
+            MainWindow.TowerSelector.Visibility = Visibility.Visible;
         }
     }
 }

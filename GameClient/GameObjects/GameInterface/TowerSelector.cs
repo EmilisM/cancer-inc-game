@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using GameClient.Constants;
 
 namespace GameClient.GameObjects.GameInterface
@@ -10,12 +12,13 @@ namespace GameClient.GameObjects.GameInterface
         public TowerSelector()
         {
             const int rowHeight = 48;
-            const int columnWidth = 48;
 
-            var columnCount = Convert.ToInt32(Math.Floor(GameConstants.MainWindowWidth / columnWidth));
+            var columnCount = Convert.ToInt32(Math.Floor(GameConstants.MainWindowWidth / MainWindow.Towers.Count));
 
             var rowDefinition = new RowDefinition { Height = new GridLength(rowHeight) };
             RowDefinitions.Add(rowDefinition);
+
+            var columnWidth = GameConstants.MainWindowWidth / MainWindow.Towers.Count;
 
             for (var i = 0; i < columnCount; i++)
             {
@@ -23,14 +26,29 @@ namespace GameClient.GameObjects.GameInterface
                 ColumnDefinitions.Add(columnDefinition);
             }
 
+            MainWindow.TowerButtons = new List<Button>();
+
+            var index = 0;
             foreach (var tower in MainWindow.Towers)
             {
-                var label = new Label
+                var button = new Button
                 {
-                    Content = tower.Name
+                    Content = tower.Name,
+                    Background = Brushes.Black,
+                    Foreground = Brushes.White
                 };
 
-                Children.Add(label);
+                button.Click += (sender, args) =>
+                {
+                    MainWindow.TowerSelector.Visibility = Visibility.Hidden;
+                    MainWindow.GameStats.Visibility = Visibility.Visible;
+                };
+
+                button.SetValue(ColumnProperty, index);
+                index++;
+
+                Children.Add(button);
+                MainWindow.TowerButtons.Add(button);
             }
 
             Visibility = Visibility.Hidden;

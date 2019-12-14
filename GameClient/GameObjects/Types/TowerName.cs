@@ -2,16 +2,16 @@
 {
     public enum TowerName
     {
-        Saline,
-        Radar,
-        CoinMiner,
-        Turret,
-        Cannon,
-        Boomerang,
-        Crossbow,
-        ChemoLauncher,
-        Laser,
-        Slingshot,
-        Bazooka
+        Saline = 1,
+        Radar = 2,
+        CoinMiner = 3,
+        Turret = 4,
+        Cannon = 5,
+        Boomerang = 6,
+        Crossbow = 7,
+        ChemoLauncher = 8,
+        Laser = 9,
+        Slingshot = 10,
+        Bazooka = 11
     }
 }

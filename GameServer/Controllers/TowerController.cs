@@ -19,11 +19,11 @@ namespace GameServer.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tower>>> Get([FromQuery] string name = "")
+        public async Task<ActionResult<IEnumerable<Tower>>> Get([FromQuery] string name)
         {
             return await _dbContext.Tower
                 .Include(tower => tower.Class)
-                .Where(tower => tower.Name.Contains(name))
+                .Where(tower => string.IsNullOrWhiteSpace(name) || tower.Name.Contains(name))
                 .ToListAsync();
         }
 

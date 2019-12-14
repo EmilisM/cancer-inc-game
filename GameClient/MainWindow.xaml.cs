@@ -42,8 +42,8 @@ namespace GameClient
         public static HubConnection GameInfoHub { get; set; }
 
         public static IClass SelectedClass { get; set; }
-
         public static List<List<Label>> Map { get; set; }
+        public static List<Button> TowerButtons { get; set; }
 
         private readonly GameViewCanvasFacade _gameViewCanvasFacade;
 
