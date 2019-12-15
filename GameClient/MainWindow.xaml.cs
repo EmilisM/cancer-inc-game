@@ -10,6 +10,7 @@ using GameClient.GameObjects.Logger;
 using GameClient.GameObjects.Tower;
 using GameClient.HubClient;
 using GameClient.HubClient.Chain;
+using GameClient.HubClient.Interpreter;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace GameClient
@@ -55,6 +56,8 @@ namespace GameClient
 
         private Handler _chainHandler;
 
+        public static List<AbstractInvoke> Actions { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -69,6 +72,7 @@ namespace GameClient
             InitializeGameViewCanvas();
             InitializeLogger();
             RegisterChain();
+            InitializeActions();
 
             _gameViewCanvasFacade = new ActualGameViewCanvasFacade();
             _gameViewCanvasFacade.AddMainMenu();
@@ -99,6 +103,25 @@ namespace GameClient
             {
                 new ConsoleLogger()
             });
+        }
+
+        private void InitializeActions()
+        {
+            Actions = new List<AbstractInvoke>
+            {
+                new InvokeBuildTower(),
+                new InvokeNotifyClasses(),
+                new InvokeRegisterClient(),
+                new InvokeResetGame()
+            };
+        }
+
+        public static void InvokeActions(InvokeContext context)
+        {
+            foreach (var invoke in Actions)
+            {
+                invoke.Interpret(context);
+            }
         }
 
         private void RegisterChain()
@@ -158,7 +181,7 @@ namespace GameClient
                 {
                     Dispatcher?.Invoke(() =>
                     {
-                        MoneyLabel.Content = money;
+                        _chainHandler.HandleRequest(money.ToString(), ClientItemType.Money);
                         _gameViewCanvasFacade.PopulateGameGrid(map, GameGrid);
                     });
                 });

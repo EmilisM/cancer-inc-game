@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using GameClient.HubClient;
-using Microsoft.AspNetCore.SignalR.Client;
+using GameClient.HubClient.Interpreter;
 
 namespace GameClient.GameObjects.MainMenu.Command
 {
@@ -9,7 +9,10 @@ namespace GameClient.GameObjects.MainMenu.Command
         public void Play()
         {
             MainWindow.MainMenu.Visibility = Visibility.Hidden;
-            MainWindow.GameInfoHub.InvokeAsync(HubConstants.NotifyClasses);
+            MainWindow.InvokeActions(new InvokeContext
+            {
+                Action = HubConstants.NotifyClasses
+            });
 
             MainWindow.CompositeLogger.LogMessage("MainMenuReceiver Play");
         }
@@ -22,7 +25,11 @@ namespace GameClient.GameObjects.MainMenu.Command
 
         public void Reset()
         {
-            MainWindow.GameInfoHub.InvokeAsync(HubConstants.ResetGame);
+            MainWindow.InvokeActions(new InvokeContext
+            {
+                Action = HubConstants.ResetGame
+            });
+
             MainWindow.CompositeLogger.LogMessage("MainMenuReceiver Reset");
         }
     }

@@ -2,11 +2,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using GameClient.Constants;
 using GameClient.GameObjects.ClassSelectorMenuButton;
 using GameClient.GameObjects.Menu;
 using GameClient.HubClient;
-using Microsoft.AspNetCore.SignalR.Client;
+using GameClient.HubClient.Interpreter;
 
 namespace GameClient.GameObjects.ClassSelectorMenu
 {
@@ -33,7 +32,11 @@ namespace GameClient.GameObjects.ClassSelectorMenu
 
         private static void OnButtonClick(string classType)
         {
-            MainWindow.GameInfoHub.InvokeAsync(HubConstants.RegisterClient, classType, GameConstants.Rows, GameConstants.Columns);
+            MainWindow.InvokeActions(new InvokeContext
+            {
+                Action = HubConstants.RegisterClient,
+                ClassType = classType
+            });
 
             MainWindow.ClassSelectorMenu.Visibility = Visibility.Hidden;
         }

@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using GameClient.Constants;
 using GameClient.HubClient;
-using Microsoft.AspNetCore.SignalR.Client;
+using GameClient.HubClient.Interpreter;
 
 namespace GameClient.GameObjects.GameInterface
 {
@@ -42,11 +42,15 @@ namespace GameClient.GameObjects.GameInterface
 
                 button.Click += (sender, args) =>
                 {
-                    MainWindow.GameInfoHub.InvokeAsync(HubConstants.BuildTower, tower.Name, tower.Cost,
-                        MainWindow.SelectedRow,
-                        MainWindow.SelectedColumn);
+                    MainWindow.InvokeActions(new InvokeContext
+                    {
+                        Action = HubConstants.BuildTower,
+                        TowerName = tower.Name,
+                        TowerCost = tower.Cost
+                    });
 
-                    MainWindow.Map[MainWindow.SelectedRow][MainWindow.SelectedColumn].Background = new SolidColorBrush(Color.FromRgb(18, 38, 59));
+                    MainWindow.Map[MainWindow.SelectedRow][MainWindow.SelectedColumn].Background =
+                        new SolidColorBrush(Color.FromRgb(18, 38, 59));
 
                     MainWindow.TowerSelector.Visibility = Visibility.Hidden;
                     MainWindow.GameStats.Visibility = Visibility.Visible;
