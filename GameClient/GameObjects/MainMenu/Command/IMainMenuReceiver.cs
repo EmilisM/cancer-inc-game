@@ -4,5 +4,6 @@
     {
         void Play();
         void Exit();
+        void Reset();
     }
 }

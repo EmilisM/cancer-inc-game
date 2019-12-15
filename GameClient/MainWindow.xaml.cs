@@ -50,6 +50,7 @@ namespace GameClient
         public static int SelectedRow { get; set; }
         public static int SelectedColumn { get; set; }
 
+        // ReSharper disable once MemberInitializerValueIgnored
         private readonly IGameViewCanvasFacade _gameViewCanvasFacade = GameViewCanvasFacade.Null;
 
         private Handler _chainHandler;
@@ -161,6 +162,9 @@ namespace GameClient
                         _gameViewCanvasFacade.PopulateGameGrid(map, GameGrid);
                     });
                 });
+
+            GameInfoHub.On(HubConstants.ResetGameReceive,
+                () => { Dispatcher?.Invoke(() => { Application.Current.Shutdown(); }); });
         }
     }
 }

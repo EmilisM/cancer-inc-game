@@ -1,4 +1,5 @@
-﻿using GameServer.Hubs;
+﻿using GameServer.GameInfoState;
+using GameServer.Hubs;
 using GameServer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,20 +26,17 @@ namespace GameServer
             services.AddApplicationInsightsTelemetry();
             services.AddSignalR();
 
-            services.AddSingleton(new GameInfo());
+            services.AddSingleton(new Originator { State = new GameInfo() });
+            services.AddSingleton(new Caretaker());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
             else
-            {
                 app.UseHsts();
-            }
 
             app.UseHttpsRedirection();
             app.UseRouting();

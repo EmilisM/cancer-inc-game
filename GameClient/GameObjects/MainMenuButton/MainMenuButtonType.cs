@@ -3,6 +3,7 @@
     public enum MainMenuButtonType
     {
         Play,
-        Exit
+        Exit,
+        Reset
     }
 }

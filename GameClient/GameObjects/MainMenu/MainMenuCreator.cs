@@ -34,8 +34,9 @@ namespace GameClient.GameObjects.MainMenu
             var receiver = new MainMenuReceiver();
             var playCommand = new PlayMainMenuCommand(receiver);
             var exitCommand = new ExitMainMenuCommand(receiver);
+            var resetCommand = new ResetMainMenuCommand(receiver);
 
-            var invoker = new MainMenuInvoker(playCommand, exitCommand);
+            var invoker = new MainMenuInvoker(playCommand, exitCommand, resetCommand);
 
             var exitMainMenuButton = new ExitMainMenuButton();
             exitMainMenuButton.Click += (sender, args) => invoker.Exit();
@@ -43,9 +44,13 @@ namespace GameClient.GameObjects.MainMenu
             var playMainMenuButton = new PlayMainMenuButton();
             playMainMenuButton.Click += (sender, args) => invoker.Play();
 
+            var resetMainMenuButton = new ResetMainMenuButton();
+            resetMainMenuButton.Click += (sender, args) => invoker.Reset();
+
             return new List<Button>
             {
                 playMainMenuButton,
+                resetMainMenuButton,
                 exitMainMenuButton
             };
         }

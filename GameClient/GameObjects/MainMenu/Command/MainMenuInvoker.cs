@@ -6,11 +6,13 @@ namespace GameClient.GameObjects.MainMenu.Command
     {
         private readonly ICommand _playCommand;
         private readonly ICommand _exitCommand;
+        private readonly ICommand _resetCommand;
 
-        public MainMenuInvoker(ICommand playCommand, ICommand exitCommand)
+        public MainMenuInvoker(ICommand playCommand, ICommand exitCommand, ICommand resetCommand)
         {
             _playCommand = playCommand;
             _exitCommand = exitCommand;
+            _resetCommand = resetCommand;
         }
 
         public void Play()
@@ -23,6 +25,12 @@ namespace GameClient.GameObjects.MainMenu.Command
         {
             _exitCommand.Execute();
             MainWindow.CompositeLogger.LogMessage("MainMenuInvoker Exit");
+        }
+
+        public void Reset()
+        {
+            _resetCommand.Execute();
+            MainWindow.CompositeLogger.LogMessage("MainMenuInvoker Reset");
         }
     }
 }

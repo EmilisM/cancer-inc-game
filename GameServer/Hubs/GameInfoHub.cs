@@ -1,26 +1,33 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using GameServer.Models;
+using GameServer.GameInfoState;
 using Microsoft.AspNetCore.SignalR;
 
 namespace GameServer.Hubs
 {
     public class GameInfoHub : Hub
     {
-        private readonly GameInfo _gameInfo;
+        private readonly Originator _originator;
+        private readonly Caretaker _caretaker;
 
-        public GameInfoHub(GameInfo gameInfo)
+        public GameInfoHub(Originator originator, Caretaker caretaker)
         {
-            _gameInfo = gameInfo;
+            _originator = originator;
+            _caretaker = caretaker;
+
+            if (_caretaker.Memento == null)
+            {
+                _caretaker.Memento = originator.CreateMemento();
+            }
         }
 
         public void RemoveClient()
         {
             var clientId = Context.ConnectionId;
 
-            if (_gameInfo.ClientClasses.ContainsKey(clientId))
+            if (_originator.State.ClientClasses.ContainsKey(clientId))
             {
-                _gameInfo.ClientClasses.Remove(clientId);
+                _originator.State.ClientClasses.Remove(clientId);
             }
         }
 
@@ -28,41 +35,43 @@ namespace GameServer.Hubs
         {
             var clientId = Context.ConnectionId;
 
-            if (_gameInfo.MapGrid == null)
+            if (_originator.State.MapGrid == null)
             {
-                _gameInfo.CreateMap(rows, columns);
+                _originator.State.CreateMap(rows, columns);
             }
 
-            if (_gameInfo.ClientClasses.TryAdd(clientId, className))
+            if (_originator.State.ClientClasses.TryAdd(clientId, className))
             {
-                await Clients.Caller.SendAsync("RegisterReceive", clientId, className, _gameInfo.Money,
-                    _gameInfo.Health, _gameInfo.MapGrid);
+                await Clients.Caller.SendAsync("RegisterReceive", clientId, className, _originator.State.Money,
+                    _originator.State.Health, _originator.State.MapGrid);
             }
         }
 
         public async Task NotifyClasses()
         {
-            var classList = _gameInfo.ClientClasses.Select(key => key.Value);
+            var classList = _originator.State.ClientClasses.Select(key => key.Value);
 
             await Clients.Caller.SendAsync("ClassesReceive", classList);
         }
 
         public async Task BuildTower(string tower, int cost, int row, int column)
         {
-            if (_gameInfo.Money < cost)
+            if (_originator.State.Money < cost)
             {
                 return;
             }
 
-            _gameInfo.MapGrid[row][column] = tower;
-            _gameInfo.Money -= cost;
+            _originator.State.MapGrid[row][column] = tower;
+            _originator.State.Money -= cost;
 
-            await Clients.All.SendAsync("BuildTowerReceive", _gameInfo.MapGrid, _gameInfo.Money);
+            await Clients.All.SendAsync("BuildTowerReceive", _originator.State.MapGrid, _originator.State.Money);
         }
 
-        public async Task GameMap(string elementName, int index)
+        public async Task ResetGame()
         {
-            await Clients.All.SendAsync("NotifyMap", _gameInfo.MapGrid);
+            _originator.SetMemento(_caretaker.Memento);
+
+            await Clients.All.SendAsync("ResetGameReceive");
         }
 
         public override async Task OnConnectedAsync()

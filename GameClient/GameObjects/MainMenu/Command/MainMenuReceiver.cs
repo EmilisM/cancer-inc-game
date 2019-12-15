@@ -19,5 +19,11 @@ namespace GameClient.GameObjects.MainMenu.Command
             Application.Current.Shutdown();
             MainWindow.CompositeLogger.LogMessage("MainMenuReceiver Exit");
         }
+
+        public void Reset()
+        {
+            MainWindow.GameInfoHub.InvokeAsync(HubConstants.ResetGame);
+            MainWindow.CompositeLogger.LogMessage("MainMenuReceiver Reset");
+        }
     }
 }
