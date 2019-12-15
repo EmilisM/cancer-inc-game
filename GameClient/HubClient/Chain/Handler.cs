@@ -2,11 +2,11 @@
 {
     public abstract class Handler
     {
-        protected Handler _typeHandler;
+        protected Handler TypeHandler;
 
         public void SetNextType(Handler nextType)
         {
-            _typeHandler = nextType;
+            TypeHandler = nextType;
         }
 
         public abstract void HandleRequest(string request, ClientItemType type);

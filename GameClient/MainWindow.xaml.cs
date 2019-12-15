@@ -50,7 +50,7 @@ namespace GameClient
         public static int SelectedRow { get; set; }
         public static int SelectedColumn { get; set; }
 
-        private readonly GameViewCanvasFacade _gameViewCanvasFacade;
+        private readonly IGameViewCanvasFacade _gameViewCanvasFacade = GameViewCanvasFacade.Null;
 
         private Handler _chainHandler;
 
@@ -69,7 +69,7 @@ namespace GameClient
             InitializeLogger();
             RegisterChain();
 
-            _gameViewCanvasFacade = new GameViewCanvasFacade();
+            _gameViewCanvasFacade = new ActualGameViewCanvasFacade();
             _gameViewCanvasFacade.AddMainMenu();
 
             MainMenu.Visibility = Visibility.Visible;

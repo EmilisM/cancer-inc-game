@@ -10,7 +10,7 @@
             }
             else
             {
-                _typeHandler.HandleRequest(request, type);
+                TypeHandler.HandleRequest(request, type);
             }
         }
     }
