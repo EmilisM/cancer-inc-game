@@ -13,5 +13,9 @@
         public const string NotifyClasses = "NotifyClasses";
 
         public const string RemoveClient = "RemoveClient";
+
+        public const string BuildTower = "BuildTower";
+
+        public const string BuildTowerReceive = "BuildTowerReceive";
     }
 }

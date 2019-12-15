@@ -17,7 +17,8 @@ namespace GameClient.GameObjects.Menu
         {
             var menuGrid = new Grid
             {
-                Margin = new Thickness(GameConstants.MainWindowWidth * 0.05, GameConstants.GameViewCanvasHeight * 0.05, 0, 0),
+                Margin = new Thickness(GameConstants.MainWindowWidth * 0.05, GameConstants.GameViewCanvasHeight * 0.05,
+                    0, 0),
                 Visibility = Visibility.Visible,
                 Name = GetObjectName().ToString()
             };
@@ -25,7 +26,8 @@ namespace GameClient.GameObjects.Menu
             var columnDefinition = new ColumnDefinition { Width = new GridLength(GameConstants.MainWindowWidth * 0.4) };
             menuGrid.ColumnDefinitions.Add(columnDefinition);
 
-            var rowTitleDefinition = new RowDefinition { Height = new GridLength(GameConstants.GameViewCanvasHeight * 0.16) };
+            var rowTitleDefinition = new RowDefinition
+                { Height = new GridLength(GameConstants.GameViewCanvasHeight * 0.16) };
             menuGrid.RowDefinitions.Add(rowTitleDefinition);
 
             var title = CreateMenuTitle();
@@ -38,7 +40,8 @@ namespace GameClient.GameObjects.Menu
             for (var index = 1; index <= buttons.Count; index++)
             {
                 var button = buttons[index - 1];
-                var rowDefinition = new RowDefinition { Height = new GridLength(GameConstants.GameViewCanvasHeight * 0.16) };
+                var rowDefinition = new RowDefinition
+                    { Height = new GridLength(GameConstants.GameViewCanvasHeight * 0.16) };
                 menuGrid.RowDefinitions.Add(rowDefinition);
 
                 button.SetValue(Grid.RowProperty, index);

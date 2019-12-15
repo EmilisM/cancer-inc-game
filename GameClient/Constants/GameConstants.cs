@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media;
 
 namespace GameClient.Constants
 {
@@ -21,5 +22,9 @@ namespace GameClient.Constants
         public static readonly int Rows = Convert.ToInt32(Math.Floor(GameViewCanvasHeight / RowHeight)) - 1;
 
         public static readonly int Columns = Convert.ToInt32(Math.Floor(MainWindowWidth / ColumnWidth));
+
+        public static readonly SolidColorBrush SelectColor = new SolidColorBrush(Color.FromRgb(18, 38, 59));
+
+        public static readonly SolidColorBrush OccupiedColor = Brushes.Blue;
     }
 }

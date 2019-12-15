@@ -8,6 +8,7 @@ namespace GameClient.GameObjects.Tower
 {
     public class Tower
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Cost { get; set; }
         public double? Damage { get; set; }
@@ -22,6 +23,7 @@ namespace GameClient.GameObjects.Tower
 
         public void FromApiTowers(ApiTower tower, IEnumerable<ApiAttackType> towerAttackTypes)
         {
+            Id = tower.Id;
             Name = tower.Name;
             Cost = tower.Cost;
             Damage = tower.Damage;

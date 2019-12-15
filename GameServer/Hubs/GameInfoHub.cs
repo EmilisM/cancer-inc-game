@@ -47,6 +47,19 @@ namespace GameServer.Hubs
             await Clients.Caller.SendAsync("ClassesReceive", classList);
         }
 
+        public async Task BuildTower(string tower, int cost, int row, int column)
+        {
+            if (_gameInfo.Money < cost)
+            {
+                return;
+            }
+
+            _gameInfo.MapGrid[row][column] = tower;
+            _gameInfo.Money -= cost;
+
+            await Clients.All.SendAsync("BuildTowerReceive", _gameInfo.MapGrid, _gameInfo.Money);
+        }
+
         public async Task GameMap(string elementName, int index)
         {
             await Clients.All.SendAsync("NotifyMap", _gameInfo.MapGrid);

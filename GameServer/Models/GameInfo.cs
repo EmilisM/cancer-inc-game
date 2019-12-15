@@ -24,10 +24,9 @@ namespace GameServer.Models
         {
             MapGrid = new List<List<string>>();
 
-            var freeColumn = Enumerable.Repeat("Free", columns).ToList();
-
             for (var i = 0; i < rows; i++)
             {
+                var freeColumn = Enumerable.Repeat("Free", columns).ToList();
                 MapGrid.Add(freeColumn);
             }
         }

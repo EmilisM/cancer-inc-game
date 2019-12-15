@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using GameClient.Constants;
 using GameClient.GameObjects.Class.Factory;
 using GameClient.GameObjects.ClassSelectorMenu;
 using GameClient.GameObjects.GameInterface;
@@ -70,11 +74,78 @@ namespace GameClient.GameObjects.GameViewCanvas
             MainWindow.GameViewCanvas.Children.Add(mainMenu);
         }
 
-        public static void AddGameGrid(List<List<string>> map)
+        public void PopulateGameGrid(List<List<string>> map, Grid grid)
+        {
+            MainWindow.Map = new List<List<Label>>();
+
+            MainWindow.SelectedRow = -1;
+            MainWindow.SelectedColumn = -1;
+
+            for (var i = 0; i < map.Count; i++)
+            {
+                var row = new List<Label>();
+                for (var j = 0; j < map[i].Count; j++)
+                {
+                    var label = new Label();
+                    row.Add(label);
+
+                    label.Background = map[i][j] == "Free"
+                        ? Brushes.Transparent
+                        : GameConstants.OccupiedColor;
+
+                    label.SetValue(Grid.RowProperty, i);
+                    label.SetValue(Grid.ColumnProperty, j);
+
+                    var i1 = i;
+                    var j1 = j;
+                    label.MouseLeftButtonDown += (sender, args) => LabelOnMouseLeftButtonDown(sender, args, i1, j1);
+
+                    grid.Children.Add(label);
+                }
+
+                MainWindow.Map.Add(row);
+            }
+        }
+
+        private void LabelOnMouseLeftButtonDown(object sender, MouseButtonEventArgs e, int row, int column)
+        {
+            if (MainWindow.SelectedRow == row && MainWindow.SelectedColumn == column)
+            {
+                MainWindow.Map[MainWindow.SelectedRow][MainWindow.SelectedColumn].Background =
+                    new SolidColorBrush();
+
+                MainWindow.SelectedRow = -1;
+                MainWindow.SelectedColumn = -1;
+
+                MainWindow.GameStats.Visibility = Visibility.Visible;
+                MainWindow.TowerSelector.Visibility = Visibility.Hidden;
+                return;
+            }
+
+            if (row >= 0 && column >= 0)
+            {
+                if (MainWindow.SelectedColumn >= 0 && MainWindow.SelectedRow >= 0)
+                {
+                    MainWindow.Map[MainWindow.SelectedRow][MainWindow.SelectedColumn].Background =
+                        new SolidColorBrush();
+                }
+
+                MainWindow.SelectedColumn = column;
+                MainWindow.SelectedRow = row;
+
+                MainWindow.Map[row][column].Background = GameConstants.SelectColor;
+
+                MainWindow.GameStats.Visibility = Visibility.Hidden;
+                MainWindow.TowerSelector.Visibility = Visibility.Visible;
+            }
+        }
+
+        public void AddGameGrid(List<List<string>> map)
         {
             var towerSelector = new TowerSelector();
             var gameStats = new GameStats();
-            var gameGrid = new GameGrid(map);
+            var gameGrid = new GameGrid();
+            PopulateGameGrid(map, (Grid) gameGrid.Child);
             var gameUi = new GameUi(gameStats, gameGrid, towerSelector);
 
             MainWindow.GameViewCanvas.Children.Add(gameUi);

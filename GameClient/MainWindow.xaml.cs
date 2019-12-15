@@ -45,6 +45,9 @@ namespace GameClient
         public static List<List<Label>> Map { get; set; }
         public static List<Button> TowerButtons { get; set; }
 
+        public static int SelectedRow { get; set; }
+        public static int SelectedColumn { get; set; }
+
         private readonly GameViewCanvasFacade _gameViewCanvasFacade;
 
         public MainWindow()
@@ -101,7 +104,7 @@ namespace GameClient
             GameInfoHub.StartAsync();
 
             GameInfoHub.On<string, string, int, int, List<List<string>>>(HubConstants.RegisterReceive,
-                (clientId, className, health, money, map) =>
+                (clientId, className, money, health, map) =>
                 {
                     Dispatcher?.Invoke(() =>
                     {
@@ -110,11 +113,14 @@ namespace GameClient
                         CompositeLogger.LogMessage($"{SelectedClass.Type.ToString()} {clientId}");
 
                         _gameViewCanvasFacade.AddTowers(SelectedClass);
-                        GameViewCanvasFacade.AddGameGrid(map);
-                        ClassLabel.Content = SelectedClass.Type.ToString();
+                        _gameViewCanvasFacade.AddGameGrid(map);
 
                         GameViewCanvas.Children.Remove(MainMenu);
                         GameViewCanvas.Children.Remove(ClassSelectorMenu);
+
+                        ClassLabel.Content = SelectedClass.Type.ToString();
+                        HealthLabel.Content = health;
+                        MoneyLabel.Content = money;
                     });
                 });
 
@@ -125,6 +131,16 @@ namespace GameClient
                     {
                         _gameViewCanvasFacade.AddClasses(list);
                         _gameViewCanvasFacade.AddClassSelectorMenu();
+                    });
+                });
+
+            GameInfoHub.On<List<List<string>>, int>(HubConstants.BuildTowerReceive,
+                (map, money) =>
+                {
+                    Dispatcher?.Invoke(() =>
+                    {
+                        MoneyLabel.Content = money;
+                        _gameViewCanvasFacade.PopulateGameGrid(map, GameGrid);
                     });
                 });
         }

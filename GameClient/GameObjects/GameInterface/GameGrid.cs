@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using GameClient.Constants;
 
 namespace GameClient.GameObjects.GameInterface
 {
     public sealed class GameGrid : Border
     {
-        public GameGrid(List<List<string>> map)
+        public GameGrid()
         {
             var gameGrid = new Grid();
 
@@ -25,44 +25,18 @@ namespace GameClient.GameObjects.GameInterface
                 gameGrid.ColumnDefinitions.Add(columnDefinition);
             }
 
-            MainWindow.Map = new List<List<Label>>();
-
-            for (var i = 0; i < map.Count; i++)
-            {
-                var row = new List<Label>();
-                for (var j = 0; j < map[i].Count; j++)
-                {
-                    var label = new Label();
-                    row.Add(label);
-
-                    label.Background = map[i][j] == "Free"
-                        ? new SolidColorBrush(Color.FromRgb(18, 38, 59))
-                        : Brushes.Black;
-
-                    label.SetValue(Grid.RowProperty, i);
-                    label.SetValue(Grid.ColumnProperty, j);
-
-                    var i1 = i;
-                    var j1 = j;
-                    label.MouseLeftButtonDown += (sender, args) => LabelOnMouseLeftButtonDown(sender, args, i1, j1);
-
-                    gameGrid.Children.Add(label);
-                }
-
-                MainWindow.Map.Add(row);
-            }
-
             BorderBrush = Brushes.DarkGray;
             BorderThickness = new Thickness(2);
             gameGrid.ShowGridLines = true;
 
-            Child = gameGrid;
-        }
+            var brush = new ImageBrush();
+            var image = new Image { Source = new BitmapImage(new Uri("Resources/background.jpg", UriKind.Relative)) };
 
-        private void LabelOnMouseLeftButtonDown(object sender, MouseButtonEventArgs e, int row, int column)
-        {
-            MainWindow.GameStats.Visibility = Visibility.Hidden;
-            MainWindow.TowerSelector.Visibility = Visibility.Visible;
+            brush.ImageSource = image.Source;
+
+            gameGrid.Background = brush;
+
+            Child = gameGrid;
         }
     }
 }
