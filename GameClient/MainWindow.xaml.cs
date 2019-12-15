@@ -3,12 +3,13 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using GameClient.Api;
 using GameClient.Constants;
 using GameClient.GameObjects.Class.Factory;
 using GameClient.GameObjects.GameViewCanvas;
 using GameClient.GameObjects.Logger;
 using GameClient.GameObjects.Tower;
+using GameClient.HubClient;
+using GameClient.HubClient.Chain;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace GameClient
@@ -35,6 +36,7 @@ namespace GameClient
         public static Label HealthLabel { get; set; }
         public static Label MoneyLabel { get; set; }
         public static Label ClassLabel { get; set; }
+        public static string ClassId { get; set; }
 
         public static List<IClass> Classes { get; set; }
         public static List<Tower> Towers { get; set; }
@@ -50,6 +52,8 @@ namespace GameClient
 
         private readonly GameViewCanvasFacade _gameViewCanvasFacade;
 
+        private Handler _chainHandler;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -63,6 +67,7 @@ namespace GameClient
             InitializeMainWindow();
             InitializeGameViewCanvas();
             InitializeLogger();
+            RegisterChain();
 
             _gameViewCanvasFacade = new GameViewCanvasFacade();
             _gameViewCanvasFacade.AddMainMenu();
@@ -95,6 +100,18 @@ namespace GameClient
             });
         }
 
+        private void RegisterChain()
+        {
+            _chainHandler = new MoneyHandler();
+            var healthHandler = new HealthHandler();
+            var classNameHandler = new ClassNameHandler();
+            var clientIdHandler = new ClientIdHandler();
+
+            _chainHandler.SetNextType(healthHandler);
+            healthHandler.SetNextType(classNameHandler);
+            classNameHandler.SetNextType(clientIdHandler);
+        }
+
         private void ClientHubConnection()
         {
             GameInfoHub = new HubConnectionBuilder()
@@ -118,9 +135,10 @@ namespace GameClient
                         GameViewCanvas.Children.Remove(MainMenu);
                         GameViewCanvas.Children.Remove(ClassSelectorMenu);
 
-                        ClassLabel.Content = SelectedClass.Type.ToString();
-                        HealthLabel.Content = health;
-                        MoneyLabel.Content = money;
+                        _chainHandler.HandleRequest(clientId, ClientItemType.ClientId);
+                        _chainHandler.HandleRequest(SelectedClass.Type.ToString(), ClientItemType.ClassName);
+                        _chainHandler.HandleRequest(money.ToString(), ClientItemType.Money);
+                        _chainHandler.HandleRequest(health.ToString(), ClientItemType.Health);
                     });
                 });
 

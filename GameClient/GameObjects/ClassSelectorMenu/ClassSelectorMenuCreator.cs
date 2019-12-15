@@ -2,10 +2,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using GameClient.Api;
 using GameClient.Constants;
 using GameClient.GameObjects.ClassSelectorMenuButton;
 using GameClient.GameObjects.Menu;
+using GameClient.HubClient;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace GameClient.GameObjects.ClassSelectorMenu

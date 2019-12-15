@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using GameClient.Api;
+using GameClient.HubClient;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace GameClient.GameObjects.MainMenu.Command

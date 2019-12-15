@@ -1,4 +1,4 @@
-﻿namespace GameClient.Api
+﻿namespace GameClient.HubClient
 {
     public class HubConstants
     {

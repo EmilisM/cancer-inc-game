@@ -93,6 +93,11 @@ namespace GameClient.GameObjects.GameViewCanvas
                         ? Brushes.Transparent
                         : GameConstants.OccupiedColor;
 
+                    if (map[i][j] != "Free")
+                    {
+                        label.Content = map[i][j];
+                    }
+
                     label.SetValue(Grid.RowProperty, i);
                     label.SetValue(Grid.ColumnProperty, j);
 
