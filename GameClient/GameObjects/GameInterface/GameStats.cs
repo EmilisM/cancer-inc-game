@@ -2,10 +2,11 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using GameClient.Constants;
+using GameClient.Visitor;
 
 namespace GameClient.GameObjects.GameInterface
 {
-    public class GameStats : Grid
+    public class GameStats : Grid, IElement
     {
         public GameStats()
         {
@@ -56,6 +57,17 @@ namespace GameClient.GameObjects.GameInterface
             Children.Add(MainWindow.HealthLabel);
             Children.Add(MainWindow.MoneyLabel);
             Children.Add(MainWindow.ClassLabel);
+
+            RowPropertyValue = 1;
         }
+
+
+        public void Accept(Visitor.Visitor visitor)
+        {
+            visitor.Visit(this);
+        }
+
+        public int RowPropertyValue { get; set; }
+        public UIElement ParentNode { get; set; }
     }
 }

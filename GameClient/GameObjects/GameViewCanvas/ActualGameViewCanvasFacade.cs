@@ -155,7 +155,8 @@ namespace GameClient.GameObjects.GameViewCanvas
             var towerSelector = new TowerSelector();
             var gameStats = new GameStats();
             var gameGrid = new GameGrid();
-            PopulateGameGrid(map, (Grid)gameGrid.Child);
+
+            PopulateGameGrid(map, (Grid) gameGrid.Child);
             var gameUi = new GameUi(gameStats, gameGrid, towerSelector);
 
             MainWindow.GameViewCanvas.Children.Add(gameUi);
@@ -163,7 +164,7 @@ namespace GameClient.GameObjects.GameViewCanvas
             MainWindow.GameUi = gameUi;
             MainWindow.GameStats = gameStats;
             MainWindow.GameGridBorder = gameGrid;
-            MainWindow.GameGrid = (Grid)gameGrid.Child;
+            MainWindow.GameGrid = (Grid) gameGrid.Child;
             MainWindow.TowerSelector = towerSelector;
         }
     }

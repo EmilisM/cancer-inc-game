@@ -4,10 +4,11 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using GameClient.Constants;
+using GameClient.Visitor;
 
 namespace GameClient.GameObjects.GameInterface
 {
-    public sealed class GameGrid : Border
+    public sealed class GameGrid : Border, IElement
     {
         public GameGrid()
         {
@@ -37,6 +38,16 @@ namespace GameClient.GameObjects.GameInterface
             gameGrid.Background = brush;
 
             Child = gameGrid;
+
+            RowPropertyValue = 0;
         }
+
+        public void Accept(Visitor.Visitor visitor)
+        {
+            visitor.Visit(this);
+        }
+
+        public int RowPropertyValue { get; set; }
+        public UIElement ParentNode { get; set; }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using GameClient.Constants;
+using GameClient.Visitor;
 
 namespace GameClient.GameObjects.GameInterface
 {
     public sealed class GameUi : Grid
     {
-        public GameUi(UIElement gameStats, UIElement gameGrid, UIElement towerSelector)
+        public GameUi(GameStats gameStats, GameGrid gameGrid, TowerSelector towerSelector)
         {
             var gameColumnDefinition = new ColumnDefinition
                 { Width = new GridLength(GameConstants.MainWindowWidth - 16) };
@@ -20,13 +21,17 @@ namespace GameClient.GameObjects.GameInterface
             RowDefinitions.Add(gameGridDefinition);
             RowDefinitions.Add(gameStatsDefinition);
 
-            gameGrid.SetValue(RowProperty, 0);
-            gameStats.SetValue(RowProperty, 1);
-            towerSelector.SetValue(RowProperty, 1);
+            var structure = new ObjectStructure();
+            structure.Attach(towerSelector);
+            structure.Attach(gameStats);
+            structure.Attach(gameGrid);
 
-            Children.Add(gameGrid);
-            Children.Add(gameStats);
-            Children.Add(towerSelector);
+            towerSelector.ParentNode = this;
+            gameStats.ParentNode = this;
+            gameGrid.ParentNode = this;
+
+            structure.Accept(new VisitorRowProperty());
+            structure.Accept(new VisitorAddChild());
 
             Visibility = Visibility.Visible;
         }

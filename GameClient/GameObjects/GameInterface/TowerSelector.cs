@@ -6,10 +6,11 @@ using System.Windows.Media;
 using GameClient.Constants;
 using GameClient.HubClient;
 using GameClient.HubClient.Interpreter;
+using GameClient.Visitor;
 
 namespace GameClient.GameObjects.GameInterface
 {
-    public class TowerSelector : Grid
+    public class TowerSelector : Grid, IElement
     {
         public TowerSelector()
         {
@@ -64,6 +65,16 @@ namespace GameClient.GameObjects.GameInterface
             }
 
             Visibility = Visibility.Hidden;
+
+            RowPropertyValue = 1;
         }
+
+        public void Accept(Visitor.Visitor visitor)
+        {
+            visitor.Visit(this);
+        }
+
+        public int RowPropertyValue { get; set; }
+        public UIElement ParentNode { get; set; }
     }
 }
